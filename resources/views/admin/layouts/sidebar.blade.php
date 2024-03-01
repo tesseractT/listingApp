@@ -139,7 +139,7 @@
         <li class="dropdown"><a href="#" data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Logged in 5 min ago</div>
@@ -182,9 +182,22 @@
         <ul class="sidebar-menu">
 
             <li class="menu-header">Starter</li>
+            <li><a class="nav-link" href="{{ route('admin.dashboard.index') }}"><i class="far fa-square"></i>
+                    <span>Dashboard
+                    </span></a></li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-columns"></i> <span>Sections</span></a>
+
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('admin.hero.index') }}">Hero</a></li>
+
+                </ul>
+            </li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                         class="fas fa-columns"></i> <span>Layout</span></a>
+
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
                     <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
