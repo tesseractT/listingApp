@@ -34,7 +34,6 @@
 
                             <div class="card-body">
                                 <p class="text-muted">We will send a link to reset your password</p>
-                                <x-auth-session-status class="mb-4" :status="session('status')" />
                                 @if (session('status'))
                                     <div class="alert alert-success">
                                         {{ session('status') }}

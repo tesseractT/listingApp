@@ -14,6 +14,7 @@ use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
+
 class NewPasswordController extends Controller
 {
     /**
@@ -52,6 +53,8 @@ class NewPasswordController extends Controller
                 ])->save();
 
                 event(new PasswordReset($user));
+
+                toastr()->success('Password reset successfully');
             }
         );
 
