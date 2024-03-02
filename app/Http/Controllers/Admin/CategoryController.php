@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -84,13 +85,19 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Response
     {
-        $category = Category::findOrFail($id);
-        $this->deleteFile($category->image_icon);
-        $this->deleteFile($category->background_image);
-        $category->delete();
+        try {
+            $category = Category::findOrFail($id);
+            $this->deleteFile($category->image_icon);
+            $this->deleteFile($category->background_image);
+            $category->delete();
 
-        return response(['status' => 'success', 'message' => 'Category deleted successfully']);
+
+            return response(['status' => 'success', 'message' => 'Category deleted successfully']);
+        } catch (\Exception $e) {
+            logger($e);
+            return response(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

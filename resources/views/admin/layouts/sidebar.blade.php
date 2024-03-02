@@ -202,6 +202,8 @@
 
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.category.index') }}">Categories</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.location.index') }}">Location</a></li>
+
 
                 </ul>
             </li>

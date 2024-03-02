@@ -66,8 +66,8 @@
                                 <div class="form-group">
                                     <label for="">Status <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
-                                        <option @selected($category->show_at_home === 1) value="1">Active</option>
-                                        <option @selected($category->show_at_home === 0) value="0">Inactive</option>
+                                        <option @selected($category->status === 1) value="1">Active</option>
+                                        <option @selected($category->status === 0) value="0">Inactive</option>
                                     </select>
                                 </div>
 
