@@ -22,7 +22,34 @@ class CategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'category.action')
+            ->addColumn('action', function ($query) {
+                $edit = '<a href ="' . route('admin.category.edit', $query->id) . '" class="btn btn-primary"><i class="fas fa-edit"></i></a>';
+                $delete = '<a href ="' . route('admin.category.destroy', $query->id) . '" class="delete-item btn btn-danger ml-2"><i class="fas fa-trash"></a>';
+                return $edit . $delete;
+            })
+            // ->editColumn('show_at_home', fn ($category) => $category->show_at_home ? 'Yes' : 'No')
+            // ->editColumn('status', fn ($category) => $category->status ? 'Active' : 'Inactive')
+            ->addColumn('show_at_home', function ($query) {
+                if ($query->show_at_home === 1) {
+                    return "<span class='badge badge-primary'>Yes</span>";
+                } else {
+                    return "<span class='badge badge-danger'>No</span>";
+                }
+            })
+            ->addColumn('status', function ($query) {
+                if ($query->status === 1) {
+                    return "<span class='badge badge-primary'>Active</span>";
+                } else {
+                    return "<span class='badge badge-danger'>Inactive</span>";
+                }
+            })
+            ->addColumn('icon', function ($query) {
+                return '<img width="50" src=" ' . asset($query->image_icon) . ' " >';
+            })
+            ->addColumn('background_image', function ($query) {
+                return '<img width="50" src=" ' . asset($query->background_image) . ' " >';
+            })
+            ->rawColumns(['icon', 'background_image', 'action', 'show_at_home', 'status'])
             ->setRowId('id');
     }
 
@@ -40,20 +67,20 @@ class CategoryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('category-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('category-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -62,15 +89,17 @@ class CategoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('id')->width(100),
+            Column::make('name'),
+            Column::make('icon')->width(200),
+            Column::make('background_image')->width(200),
+            Column::make('show_at_home'),
+            Column::make('status'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(150)
+                ->addClass('text-center'),
         ];
     }
 
