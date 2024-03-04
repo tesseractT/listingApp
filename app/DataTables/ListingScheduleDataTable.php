@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Location;
+use App\Models\ListingSchedule;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class LocationDataTable extends DataTable
+class ListingScheduleDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,17 +23,9 @@ class LocationDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $edit = '<a href ="' . route('admin.location.edit', $query->id) . '" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>';
-                $delete = '<a href ="' . route('admin.location.destroy', $query->id) . '" class="delete-item btn btn-sm btn-danger ml-2"><i class="fas fa-trash"></a>';
-
-                return $edit . $delete ;
-            })
-            ->addColumn('show_at_home', function ($query) {
-                if ($query->show_at_home === 1) {
-                    return "<span class='badge badge-primary'>Yes</span>";
-                } else {
-                    return "<span class='badge badge-danger'>No</span>";
-                }
+                $edit = '<a href ="' . route('admin.listing-schedule.edit', $query->id) . '" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>';
+                $delete = '<a href ="' . route('admin.listing-schedule.destroy', $query->id) . '" class="delete-item btn btn-sm btn-danger ml-2"><i class="fas fa-trash"></a>';
+                return $edit . $delete;
             })
             ->addColumn('status', function ($query) {
                 if ($query->status === 1) {
@@ -42,16 +34,16 @@ class LocationDataTable extends DataTable
                     return "<span class='badge badge-danger'>Inactive</span>";
                 }
             })
-            ->rawColumns(['show_at_home', 'status', 'action'])
+            ->rawColumns(['status', 'action'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Location $model): QueryBuilder
+    public function query(ListingSchedule $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('listing_id', $this->listing_id)->newQuery();
     }
 
     /**
@@ -60,11 +52,11 @@ class LocationDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('location-table')
+            ->setTableId('listingschedule-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(0)
+            ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -83,13 +75,14 @@ class LocationDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('name'),
-            Column::make('show_at_home'),
+            Column::make('day'),
+            Column::make('start_time'),
+            Column::make('end_time'),
             Column::make('status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(150)
+                ->width(100)
                 ->addClass('text-center'),
         ];
     }
@@ -99,6 +92,6 @@ class LocationDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Location_' . date('YmdHis');
+        return 'ListingSchedule_' . date('YmdHis');
     }
 }
