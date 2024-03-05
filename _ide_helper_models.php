@@ -293,6 +293,48 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Package
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $type
+ * @property float $price
+ * @property int $num_of_days
+ * @property int $num_of_listings
+ * @property int $num_of_photos
+ * @property int $num_of_videos
+ * @property int $num_of_amenities
+ * @property int $num_of_featured_listing
+ * @property int $show_at_home
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Package newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Package newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Package onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Package query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereNumOfAmenities($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereNumOfDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereNumOfFeaturedListing($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereNumOfListings($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereNumOfPhotos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereNumOfVideos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereShowAtHome($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Package withoutTrashed()
+ */
+	class Package extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
