@@ -7,7 +7,7 @@
              <div class="col-xl-6 col-md-7 d-none d-md-block">
                  <ul class="wsus__topbar_left">
                      <li><a href="mailto:support@websolutionus.com"><i class="fal fa-envelope"></i>
-                             support@websolutionus.com</a></li>
+                             @gmail.com</a></li>
                      <li><a href="callto:+6958474522655"><i class="fal fa-phone-alt"></i>+6958474522655</a></li>
                  </ul>
              </div>
@@ -40,7 +40,7 @@
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
              <ul class="navbar-nav m-auto">
                  <li class="nav-item">
-                     <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                     <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="about.html">about</a>

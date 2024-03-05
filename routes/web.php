@@ -21,6 +21,10 @@ use App\Http\Controllers\Frontend\AgentListingScheduleController;
 */
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('listing', [FrontendController::class, 'listings'])->name('listings');
+Route::get('listing-modal/{id}', [FrontendController::class, 'listingModal'])->name('listing-modal');
+Route::get('listing/{slug}', [FrontendController::class, 'showListing'])->name('listing.show');
+
 
 
 Route::middleware('auth')->group(function () {

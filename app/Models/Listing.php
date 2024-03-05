@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Listing extends Model
@@ -26,5 +27,25 @@ class Listing extends Model
     function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    function gallery(): HasMany
+    {
+        return $this->hasMany(ListingImageGallerry::class, 'listing_id', 'id');
+    }
+
+    function videoGallery(): HasMany
+    {
+        return $this->hasMany(ListingVideoGallerry::class, 'listing_id', 'id');
+    }
+
+    function amenities(): HasMany
+    {
+        return $this->hasMany(ListingAmenity::class, 'listing_id', 'id');
+    }
+
+    function schedules(): HasMany
+    {
+        return $this->hasMany(ListingSchedule::class, 'listing_id', 'id');
     }
 }

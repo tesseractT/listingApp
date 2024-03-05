@@ -30,3 +30,12 @@ if (!function_exists('getYouTubeThumbnail')) {
         return null;
     }
 }
+
+/** Truncate longer texts */
+
+if (!function_exists('truncateText')) {
+    function truncateText(string $text, int $length = 25): ?string
+    {
+        return \Str::of($text)->limit($length);
+    }
+}
