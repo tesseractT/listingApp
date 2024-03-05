@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\ListingImageGalleryController;
 use App\Http\Controllers\Admin\ListingVideoGalleryController;
 use App\Http\Controllers\Admin\ListingScheduleController;
+use App\Http\Controllers\Admin\PendingListingController;
 
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('guest');
 Route::get('/admin/forgot-password', [AdminAuthController::class, 'PasswordRequest'])->name('admin.password.request')->middleware('guest');
@@ -44,6 +45,10 @@ Route::group([
 
     /** Listing Routes  */
     Route::resource('/listing', ListingController::class);
+
+    /** Pending Listing Routes  */
+    Route::get('/pending-listing', [PendingListingController::class, 'index'])->name('pending-listing.index');
+    Route::post('/pending-listing', [PendingListingController::class, 'update'])->name('pending-listing.update');
 
     /** Listing Image Galllery Routes  */
     Route::resource('/listing-image-gallery', ListingImageGalleryController::class);

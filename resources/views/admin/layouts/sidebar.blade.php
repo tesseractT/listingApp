@@ -198,7 +198,7 @@
             </li>
             <li
                 class="dropdown
-                {{ setSidebarActive(['admin.category.*', 'admin.location.*', 'admin.amenity.*', 'admin.listing.*']) }}">
+                {{ setSidebarActive(['admin.category.*', 'admin.location.*', 'admin.amenity.*', 'admin.listing.*', 'admin.pending-listing.*']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                         class="fas fa-columns"></i> <span>Listings</span></a>
 
@@ -211,6 +211,9 @@
                             href="{{ route('admin.amenity.index') }}">Amenities</a></li>
                     <li class="{{ setSidebarActive(['admin.listing.*', 'admin.listing-.*']) }}"><a class="nav-link"
                             href="{{ route('admin.listing.index') }}">All Listings</a></li>
+                    <li class="{{ setSidebarActive(['admin.pending-listing.*', 'admin.listing-.*']) }}"><a
+                            class="nav-link" href="{{ route('admin.pending-listing.index') }}">Pending Listings</a>
+                    </li>
                 </ul>
             </li>
             <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank

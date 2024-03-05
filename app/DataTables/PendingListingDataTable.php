@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\AgentListing;
+use App\Models\PendingListing;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,9 +12,8 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use App\Models\Listing;
-use Illuminate\Support\Facades\Auth;
 
-class AgentListingDataTable extends DataTable
+class PendingListingDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -25,20 +24,18 @@ class AgentListingDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $edit = '<a href ="' . route('user.listing.edit', $query->id) . '" class="btn btn-sm btn-primary ml-2"><i class="fas fa-edit"></i></a>';
-                $delete = '<a href ="' . route('user.listing.destroy', $query->id) . '" class="delete-item btn btn-sm btn-danger ml-2"><i class="fas fa-trash"></a>';
-
-
-                $more = '<div class="dropdown">
-                <button class="btn btn-secondary btn-sm ml-4 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                $edit = '<a href ="' . route('admin.listing.edit', $query->id) . '" class="btn btn-sm btn-primary ml-2"><i class="fas fa-edit"></i></a>';
+                $delete = '<a href ="' . route('admin.listing.destroy', $query->id) . '" class="delete-item btn btn-sm btn-danger ml-2"><i class="fas fa-trash"></a>';
+                $more = '<div class="btn-group dropleft">
+            <button type="button" class="btn btn-sm ml-2 btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="' . route('user.listing-image-gallery.index', ['id' => $query->id]) . '">Image Gallery</a></li>
-                  <li><a class="dropdown-item" href="' . route('user.listing-video-gallery.index', ['id' => $query->id]) . '">Video Gallery</a></li>
-                  <li><a class="dropdown-item" href="' . route('user.listing-schedule.index', $query->id) . '">Listing Schedule</a></li>
-                </ul>
-              </div>';
+            </button>
+            <div class="dropdown-menu dropleft">
+              <a class="dropdown-item" href="' . route('admin.listing-image-gallery.index', ['id' => $query->id]) . '">Image Gallery</a>
+              <a class="dropdown-item" href="' . route('admin.listing-video-gallery.index', ['id' => $query->id]) . '">Video Gallery</a>
+              <a class="dropdown-item" href="' . route('admin.listing-schedule.index',  $query->id) . '">Schedule</a>
+            </div>
+          </div>';
                 return $more . $edit . $delete;
             })
             ->addColumn('category', function ($query) {
@@ -48,31 +45,18 @@ class AgentListingDataTable extends DataTable
                 return $query->location->name;
             })
             ->addColumn('status', function ($query) {
-                if ($query->status === 1) {
-                    $status =  "<span class='badge bg-success'>Active</span>";
-                } else {
-                    $status = "";
-                }
-                if ($query->is_featured === 1) {
-                    $featured =  "<span class='badge bg-primary'>Featured</span>";
-                } else {
-                    $featured = "";
-                }
-                if ($query->is_verified === 1) {
-                    $verified =  "<span class='badge bg-info'>Verified</span>";
-                } else {
-                    $verified = "";
-                }
-                if ($query->is_approved === 0) {
-                    $approved =  "<span class='badge bg-warning'>Pending</span>";
-                }
-                if ($query->is_approved === 1) {
-                    $approved =  "<span class='badge bg-success'>Approved</span>";
-                }
-                return $approved . $status . $featured . $verified;
+                $html = '<select class="form-control approve" data-id="' . $query->id . '">
+                    <option value="0" ' . ($query->is_approved == 0 ? 'selected' : '') . '>Pending</option>
+                    <option value="1" ' . ($query->is_approved == 1 ? 'selected' : '') . '>Approved</option>
+                </select>';
+                return $html;
             })
-
-
+            ->addColumn('image', function ($query) {
+                return '<img width="70" src=" ' . asset($query->image) . ' " >';
+            })
+            ->addColumn('by', function ($query) {
+                return $query->user?->name;
+            })
 
             ->rawColumns(['status', 'action', 'is_featured', 'is_verified', 'image'])
             ->setRowId('id');
@@ -83,7 +67,7 @@ class AgentListingDataTable extends DataTable
      */
     public function query(Listing $model): QueryBuilder
     {
-        return $model->where('user_id', Auth::user()->id)->newQuery();
+        return $model->where('is_approved', 0)->newQuery();
     }
 
     /**
@@ -92,7 +76,7 @@ class AgentListingDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('agentlisting-table')
+            ->setTableId('pendinglisting-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -114,12 +98,13 @@ class AgentListingDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-
             Column::make('id'),
+            Column::make('image'),
             Column::make('title'),
             Column::make('category'),
             Column::make('location'),
-            Column::make('status')->width(150),
+            Column::make('status'),
+            Column::make('by'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -133,6 +118,6 @@ class AgentListingDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'AgentListing_' . date('YmdHis');
+        return 'PendingListing_' . date('YmdHis');
     }
 }

@@ -163,6 +163,13 @@ class AgentListingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $listing = Listing::findOrFail($id);
+            $listing->delete();
+            return response()->json(['status' => 'success', 'message' => 'Listing has been deleted successfully']);
+        } catch (\Exception $e) {
+            logger($e);
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }
