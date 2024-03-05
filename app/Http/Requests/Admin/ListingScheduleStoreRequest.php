@@ -22,7 +22,7 @@ class ListingScheduleStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'day' => ['required', 'string', 'unique:listing_schedules,day,'],
+            'day' => ['required', 'string',],
             'start_time' => ['required', 'string'],
             'end_time' => ['required', 'string'],
             'status' => ['required', 'boolean'],

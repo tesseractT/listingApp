@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/summernote.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/nice-select.css') }}">
 
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
+
+
+
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -23,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
+    @stack('styles')
 </head>
 
 <body>
@@ -88,6 +93,11 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
+
+
+
+
 
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
@@ -99,6 +109,7 @@
             @endforeach
         @endif
     </script>
+    @stack('scripts')
 
 </body>
 

@@ -179,7 +179,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="read_btn">upload</button>
+                                        <button type="submit" class="read_btn">Change Password</button>
                                     </div>
                                 </div>
                             </form>

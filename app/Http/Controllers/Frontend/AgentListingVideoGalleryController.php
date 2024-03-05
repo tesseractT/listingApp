@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use App\Models\ListingVideoGallerry;
-use Illuminate\Http\RedirectResponse;
 use App\Models\Listing;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
-class ListingVideoGalleryController extends Controller
+class AgentListingVideoGalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,8 @@ class ListingVideoGalleryController extends Controller
     {
         $videos = ListingVideoGallerry::where('listing_id', request()->id)->get();
         $listingTitle = Listing::select('title')->where('id', request()->id)->first();
-        return view('admin.listing.listing-video-gallery.index', compact('videos', 'listingTitle'));
+
+        return view('frontend.dashboard.listing.video-gallery.index', compact('videos', 'listingTitle'));
     }
 
     /**
@@ -29,7 +30,7 @@ class ListingVideoGalleryController extends Controller
     {
         $request->validate(
             [
-                'video_url' => ['required', 'url'],
+                'video_url' => ['required', 'url', 'unique:listing_video_gallerries,video_url'],
                 'listing_id' => ['required']
             ],
             [
@@ -44,6 +45,7 @@ class ListingVideoGalleryController extends Controller
 
         return redirect()->back()->with('success', 'Video added successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
