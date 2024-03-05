@@ -12,6 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use App\Models\Listing;
+use Illuminate\Support\Facades\Auth;
 
 class AgentListingDataTable extends DataTable
 {
@@ -79,7 +80,7 @@ class AgentListingDataTable extends DataTable
      */
     public function query(Listing $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('user_id', Auth::user()->id)->newQuery();
     }
 
     /**
