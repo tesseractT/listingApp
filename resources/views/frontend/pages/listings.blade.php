@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                            BREADCRUMB PART START
-                                                                                        ===========================-->
+                                                                                                BREADCRUMB PART START
+                                                                                            ===========================-->
     <div id="breadcrumb_part">
         <div class="bread_overlay">
             <div class="container">
@@ -11,7 +11,7 @@
                         <h4>listing</h4>
                         <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"> Home </a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}"> Home </a></li>
                                 <li class="breadcrumb-item active" aria-current="page"> listing </li>
                             </ol>
                         </nav>
@@ -21,13 +21,13 @@
         </div>
     </div>
     <!--==========================
-                                                                                            BREADCRUMB PART END
-                                                                                        ===========================-->
+                                                                                                BREADCRUMB PART END
+                                                                                            ===========================-->
 
 
     <!--==========================
-                                                                                            LISTING PAGE START
-                                                                                        ===========================-->
+                                                                                                LISTING PAGE START
+                                                                                            ===========================-->
     <section id="listing_grid" class="grid_view">
         <div class="container">
             <div class="row">
@@ -145,7 +145,8 @@
                                             <i class="fas fa-star-half-alt"></i>
                                             <span>(5 review)</span>
                                         </p>
-                                        <a href="{{ route('listing.show', $listing->slug) }}">{{ truncateText($listing->title) }}</a>
+                                        <a
+                                            href="{{ route('listing.show', $listing->slug) }}">{{ truncateText($listing->title) }}</a>
                                         <p class="address">{{ $listing->location->name }}</p>
                                     </div>
                                 </div>
@@ -182,6 +183,6 @@
 
 
     <!--==========================
-                                                                                            LISTING PAGE START
-                                                                                        ===========================-->
+                                                                                                LISTING PAGE START
+                                                                                            ===========================-->
 @endsection

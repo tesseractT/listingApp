@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use App\Models\Hero;
 use App\Models\Category;
 use App\Models\Listing;
+use App\Models\Package;
 
 class FrontendController extends Controller
 {
@@ -15,7 +16,8 @@ class FrontendController extends Controller
     {
         $hero = Hero::first();
         $categories = Category::where('status', 1,)->get();
-        return view('frontend.home.index', compact('hero', 'categories'));
+        $packages = Package::where('status', 1)->where('show_at_home', 1)->limit(3)->get();
+        return view('frontend.home.index', compact('hero', 'categories', 'packages'));
     }
 
     function listings(Request $request): View
@@ -41,5 +43,11 @@ class FrontendController extends Controller
         $listing = Listing::with(['location', 'category'])->where(['status' => 1, 'is_verified' => 1])->where('slug', $slug)->first();
         $similarListings = Listing::with(['location', 'category'])->where(['status' => 1, 'is_verified' => 1])->where('category_id', $listing->category_id)->where('id', '!=', $listing->id)->latest()->limit(3)->get();
         return view('frontend.pages.listing-view', compact('listing', 'similarListings'));
+    }
+
+    function showPackages(): View
+    {
+        $packages = Package::where('status', 1)->get();
+        return view('frontend.pages.packages', compact('packages'));
     }
 }
