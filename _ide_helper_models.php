@@ -307,6 +307,7 @@ namespace App\Models{
  * @property int $num_of_featured_listing
  * @property int $show_at_home
  * @property int $status
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Package newModelQuery()
@@ -314,6 +315,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Package onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Package query()
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereNumOfAmenities($value)
@@ -331,6 +333,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Package withoutTrashed()
  */
 	class Package extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Setting
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting query()
+ */
+	class Setting extends \Eloquent {}
 }
 
 namespace App\Models{

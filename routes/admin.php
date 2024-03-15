@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ListingVideoGalleryController;
 use App\Http\Controllers\Admin\ListingScheduleController;
 use App\Http\Controllers\Admin\PendingListingController;
 use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\SettingController;
 
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('guest');
 Route::get('/admin/forgot-password', [AdminAuthController::class, 'PasswordRequest'])->name('admin.password.request')->middleware('guest');
@@ -67,4 +68,8 @@ Route::group([
 
     /** Package Routes  */
     Route::resource('/package', PackageController::class);
+
+    /** Settings Routes  */
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::post('/general-settings', [SettingController::class, 'updateGeneralSetting'])->name('general-settings.update');
 });
