@@ -293,6 +293,45 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Order
+ *
+ * @property int $id
+ * @property string $order_id
+ * @property string $transaction_id
+ * @property int $user_id
+ * @property int $package_id
+ * @property string $payment_method
+ * @property string $payment_status
+ * @property float $base_amount
+ * @property string $base_currency
+ * @property float $paid_amount
+ * @property string $paid_currency
+ * @property string $payment_date
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereBaseAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereBaseCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePackageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaidAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaidCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentMethod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereTransactionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereUserId($value)
+ */
+	class Order extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Package
  *
  * @property int $id
@@ -339,9 +378,19 @@ namespace App\Models{
 /**
  * App\Models\PaymentSetting
  *
+ * @property int $id
+ * @property string $key
+ * @property string|null $value
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting whereValue($value)
  */
 	class PaymentSetting extends \Eloquent {}
 }
@@ -365,6 +414,35 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereValue($value)
  */
 	class Setting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Subscription
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $package_id
+ * @property int $order_id
+ * @property string $purchase_date
+ * @property string|null $expiry_date
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription whereExpiryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription wherePackageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription wherePurchaseDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscription whereUserId($value)
+ */
+	class Subscription extends \Eloquent {}
 }
 
 namespace App\Models{

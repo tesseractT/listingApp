@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CreateOrder;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Session;
@@ -84,6 +85,18 @@ class PaymentController extends Controller
 
         $response = $provider->capturePaymentOrder($request->token);
 
+
+        if (isset($response['status']) && $response['status'] === 'COMPLETED') {
+            $capture = $response['purchase_units'][0]['payments']['captures'][0];
+            $paymentInfo = [
+                'transaction_id' => $capture['id'],
+                'payment_method' => 'Paypal',
+                'paid_amount' => $capture['amount']['value'],
+                'paid_currency' => $capture['amount']['currency_code'],
+                'payment_status' => 'Completed'
+            ];
+            CreateOrder::dispatch($paymentInfo);
+        }
         dd($response);
     }
 
