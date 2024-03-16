@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4d2d05b24a1dff45ef93b76a7202e96b36a9ceb0',
+        'reference' => 'f567e7e111b8cfd3d05b0e7a7a9a01a92fdbf136',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -508,7 +508,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4d2d05b24a1dff45ef93b76a7202e96b36a9ceb0',
+            'reference' => 'f567e7e111b8cfd3d05b0e7a7a9a01a92fdbf136',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1285,6 +1285,15 @@
             'install_path' => __DIR__ . '/../spatie/laravel-ignition',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'srmklive/paypal' => array(
+            'pretty_version' => '3.0.30',
+            'version' => '3.0.30.0',
+            'reference' => 'd511038ff01f466e7bfca475c7417b5a6c4d38a5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../srmklive/paypal',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/console' => array(
             'pretty_version' => 'v6.4.3',

@@ -4,13 +4,12 @@
     <section class="section">
         <div class="section-header">
             <div class="section-header-back">
-                <a href="{{ route('admin.location.index') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                <a href="{{ route('admin.dashboard.index') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
             <h1>Settings</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard.index') }}">Dashboard</a></div>
-                <div class="breadcrumb-item active"><a href="">All Settings</a></div>
-                <div class="breadcrumb-item">Create</div>
+                <div class="breadcrumb-item">Settings</div>
             </div>
         </div>
 
@@ -106,8 +105,8 @@
                                                                     <label for="">Site Currency Position</label>
                                                                     <select name="site_currency_position"
                                                                         class="form-control">
-                                                                        <option @selected(config('settings.site_currency_position') === 'left')
-                                                                            value="left">Left</option>
+                                                                        <option @selected(config('settings.site_currency_position') === 'left') value="left">
+                                                                            Left</option>
                                                                         <option @selected(config('settings.site_currency_position') === 'right')
                                                                             value="right">Right</option>
                                                                     </select>

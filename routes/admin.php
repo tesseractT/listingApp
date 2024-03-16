@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ListingScheduleController;
 use App\Http\Controllers\Admin\PendingListingController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\PaymentSettingController;
 
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('guest');
 Route::get('/admin/forgot-password', [AdminAuthController::class, 'PasswordRequest'])->name('admin.password.request')->middleware('guest');
@@ -72,4 +73,9 @@ Route::group([
     /** Settings Routes  */
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/general-settings', [SettingController::class, 'updateGeneralSetting'])->name('general-settings.update');
+
+
+    /** Payment Settings Routes  */
+    Route::get('/payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
+    Route::post('/paypal-settings', [PaymentSettingController::class, 'paypalSetting'])->name('paypal-settings.update');
 });

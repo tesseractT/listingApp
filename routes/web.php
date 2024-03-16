@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\AgentListingController;
 use App\Http\Controllers\Frontend\AgentListingImageGalleryController;
 use App\Http\Controllers\Frontend\AgentListingVideoGalleryController;
 use App\Http\Controllers\Frontend\AgentListingScheduleController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], func
     Route::get('/listing-schedule/{id}/edit', [AgentListingScheduleController::class, 'edit'])->name('listing-schedule.edit');
     Route::put('/listing-schedule/{id}', [AgentListingScheduleController::class, 'update'])->name('listing-schedule.update');
     Route::delete('/listing-schedule/{id}', [AgentListingScheduleController::class, 'destroy'])->name('listing-schedule.destroy');
+});
+
+/** Payment Routes  */
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
+    Route::get('/paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
+    Route::get('/paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
 });
 
 require __DIR__ . '/auth.php';

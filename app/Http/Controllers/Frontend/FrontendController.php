@@ -9,6 +9,7 @@ use App\Models\Hero;
 use App\Models\Category;
 use App\Models\Listing;
 use App\Models\Package;
+use Session;
 
 class FrontendController extends Controller
 {
@@ -54,6 +55,10 @@ class FrontendController extends Controller
     function checkout(string $id): View
     {
         $package = Package::findOrFail($id);
+
+        /** Store package id in session */
+        Session::put('selected_package_id', $package->id);
+
         return view('frontend.pages.checkout', compact('package'));
     }
 }

@@ -218,12 +218,13 @@
             </li>
             <li class="dropdown {{ setSidebarActive(['admin.package.index']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                        class="fas fa-columns"></i> <span>Manage Packages</span></a>
+                        class="fas fa-columns"></i> <span>Manage Packages & Payments</span></a>
 
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.package.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.package.index') }}">All Packages</a></li>
-
+                            href="{{ route('admin.package.index') }}">Packages</a></li>
+                    <li class="{{ setSidebarActive(['admin.package.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.payment-settings.index') }}">Payment Settings</a></li>
                 </ul>
             </li>
             <li><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="far fa-square"></i> <span>
