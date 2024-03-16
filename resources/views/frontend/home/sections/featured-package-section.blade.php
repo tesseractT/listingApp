@@ -16,7 +16,7 @@
                         <div class="col-xl-4 col-md-6 col-lg-4">
                             <div class="member_price">
                                 <h4>{{ $package->name }}</h4>
-                                <h5>${{ $package->price }}
+                                <h5>{{ currencyPosition($package->price) }}
                                     @if ($package->num_of_days === -1)
                                         <span>/ Lifetime</span>
                                     @else
@@ -52,7 +52,7 @@
                                 @else
                                     <p>{{ $package->num_of_featured_listing }} Featured Listings</p>
                                 @endif
-                                <a href="#">Order now</a>
+                                <a href="{{ route('checkout.index', $package->id) }}">Order now</a>
                             </div>
                         </div>
                     @endforeach
