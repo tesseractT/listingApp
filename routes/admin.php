@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PendingListingController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\PaymentSettingController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('guest');
 Route::get('/admin/forgot-password', [AdminAuthController::class, 'PasswordRequest'])->name('admin.password.request')->middleware('guest');
@@ -69,6 +70,11 @@ Route::group([
 
     /** Package Routes  */
     Route::resource('/package', PackageController::class);
+
+
+    /** Order Routes  */
+    Route::resource('/orders', OrderController::class);
+
 
     /** Settings Routes  */
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
