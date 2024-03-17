@@ -55,5 +55,7 @@ class CreateOrderListener
             ]
 
         );
+
+        Session::forget('selected_package_id');
     }
 }
