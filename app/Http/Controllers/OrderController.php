@@ -55,7 +55,7 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) : RedirectResponse
+    public function update(Request $request, string $id): RedirectResponse
     {
         $order = Order::findOrFail($id);
         $order->payment_status = $request->payment_status;
@@ -69,6 +69,13 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $package = Order::findOrFail($id);
+            $package->delete();
+            return response()->json(['status' => 'success', 'message' => 'Package has been deleted successfully']);
+        } catch (\Exception $e) {
+            logger($e);
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

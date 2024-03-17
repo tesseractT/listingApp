@@ -36,6 +36,7 @@
                                     <address>
                                         <strong>Payment Method:</strong><br>
                                         {{ $order->payment_method }}<br>
+                                        Transaction ID : {{ $order->transaction_id }}<br>
                                     </address>
                                 </div>
                                 <div class="col-md-6 text-md-right">
@@ -69,7 +70,7 @@
                                             {{ $order->base_currency }}</td>
                                         <td class="text-center">{{ number_format($order->paid_amount, 2) }}
                                             {{ $order->paid_currency }}</td>
-                                        <td class="text-right">${{ number_format($order->base_amount, 2) }}
+                                        <td class="text-right">{{ number_format($order->base_amount, 2) }}
                                             {{ $order->base_currency }}</td>
                                     </tr>
                                 </table>
