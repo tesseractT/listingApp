@@ -41,4 +41,29 @@ class PaymentSettingController extends Controller
 
         return redirect()->back()->with('success', 'Paypal setting updated successfully');
     }
+
+    function stripeSetting(Request $request): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'stripe_status' => ['required', 'in:active,inactive'],
+            'stripe_country' => ['required', 'string'],
+            'stripe_currency' => ['required', 'string'],
+            'stripe_currency_rate' => ['required', 'numeric'],
+            'stripe_key' => ['required', 'string'],
+            'stripe_secret_key' => ['required', 'string'],
+        ]);
+
+        foreach ($validatedData as $key => $value) {
+
+            PaymentSetting::updateOrCreate([
+                'key' => $key,
+                'value' => $value,
+            ]);
+        }
+
+        $paymentSettingService = app()->make(PaymentSettingsService::class);
+        $paymentSettingService->clearCachedSettings();
+
+        return redirect()->back()->with('success', 'Paypal setting updated successfully');
+    }
 }

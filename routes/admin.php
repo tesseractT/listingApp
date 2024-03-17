@@ -78,4 +78,5 @@ Route::group([
     /** Payment Settings Routes  */
     Route::get('/payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
     Route::post('/paypal-settings', [PaymentSettingController::class, 'paypalSetting'])->name('paypal-settings.update');
+    Route::post('/stripe-settings', [PaymentSettingController::class, 'stripeSetting'])->name('stripe-settings.update');
 });

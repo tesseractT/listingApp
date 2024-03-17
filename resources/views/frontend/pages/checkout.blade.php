@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                BREADCRUMB PART START
-                                                                            ===========================-->
+                                                                                            BREADCRUMB PART START
+                                                                                        ===========================-->
     <div id="breadcrumb_part">
         <div class="bread_overlay">
             <div class="container">
@@ -21,13 +21,13 @@
         </div>
     </div>
     <!--==========================
-                                                                                BREADCRUMB PART END
-                                                                            ===========================-->
+                                                                                            BREADCRUMB PART END
+                                                                                        ===========================-->
 
 
     <!--==========================
-                                                                                PAYMENT PAGE START
-                                                                            ===========================-->
+                                                                                            PAYMENT PAGE START
+                                                                                        ===========================-->
     <section id="wsus__custom_page">
         <div class="container">
             <div class="row">
@@ -47,9 +47,9 @@
 
 
                             <div class="col-lg-3 col-6 col-sm-4">
-                                <a class="wsus__single_payment" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                    href="#">
-                                    <img src="images/pay_2.jpg" alt="payment method" class="img-fluid w-100">
+                                <a class="wsus__single_payment" href="{{ route('stripe.payment') }}">
+                                    <img src="{{ asset('default/stripe-logo.png') }}" alt="payment method"
+                                        class="img-fluid w-100">
                                 </a>
                             </div>
                             <div class="col-lg-3 col-6 col-sm-4">
@@ -139,6 +139,6 @@
         </div>
     </div>
     <!--==========================
-                                                                                CUSTOM PAGE END
-                                                                            ===========================-->
+                                                                                            CUSTOM PAGE END
+                                                                                        ===========================-->
 @endsection
