@@ -1,5 +1,11 @@
 @extends('admin.layouts.master')
-
+@push('styles')
+    <style>
+        .select2.select2-container {
+            width: 100% !important;
+        }
+    </style>
+@endpush
 @section('contents')
     <section class="section">
         <div class="section-header">
@@ -38,7 +44,8 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#contact4"
-                                                role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                                role="tab" aria-controls="contact" aria-selected="false">RazorPay
+                                                Settings</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -46,15 +53,7 @@
                                     <div class="tab-content no-padding" id="myTab2Content">
                                         @include('admin.payment-setting.sections.paypal-settings')
                                         @include('admin.payment-setting.sections.stripe-settings')
-                                        <div class="tab-pane fade" id="contact4" role="tabpanel"
-                                            aria-labelledby="contact-tab4">
-                                            Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin
-                                            ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque
-                                            fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius
-                                            lectus elit id dolor. Nam malesuada orci non ornare vulputate. Ut ut
-                                            sollicitudin magna. Vestibulum eget ligula ut ipsum venenatis ultrices. Proin
-                                            bibendum bibendum augue ut luctus.
-                                        </div>
+                                        @include('admin.payment-setting.sections.razorpay-settings')
                                     </div>
                                 </div>
                             </div>

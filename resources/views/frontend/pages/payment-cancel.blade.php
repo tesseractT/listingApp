@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                                                                                                                                                                                                                            BREADCRUMB PART START
-                                                                                                                                                                                                                                                                                        ===========================-->
+                                                                                                                                                                                                                                                                                                BREADCRUMB PART START
+                                                                                                                                                                                                                                                                                            ===========================-->
     {{-- <div id="breadcrumb_part">
         <div class="bread_overlay">
             <div class="container">
@@ -21,13 +21,13 @@
         </div>
     </div> --}}
     <!--==========================
-                                                                                                                                                                                                                                                                                            BREADCRUMB PART END
-                                                                                                                                                                                                                                                                                        ===========================-->
+                                                                                                                                                                                                                                                                                                BREADCRUMB PART END
+                                                                                                                                                                                                                                                                                            ===========================-->
 
 
     <!--==========================
-                                                                                                                                                                                                                                                                                            LISTING PAGE START
-                                                                                                                                                                                                                                                                                        ===========================-->
+                                                                                                                                                                                                                                                                                                LISTING PAGE START
+                                                                                                                                                                                                                                                                                            ===========================-->
     <section id="wsus__package">
         <div class="wsus__package_overlay">
             <div class="container">
@@ -35,7 +35,7 @@
                     <i style="font-size: 100px; color:red" class="fas fa-times-circle"></i>
                     <h5>Payment Canceled</h5>
                     @if ($errors->has('error'))
-                        <div class="alert alert-danger mt-3">{{ $error->first('error') }}</div>
+                        <div class="alert alert-danger mt-3">{{ $errors->first('error') }}</div>
                     @endif
                     <a href="{{ url('/') }}" class="btn btn-warning mt-4">Go to Home</a>
                 </div>
@@ -47,6 +47,6 @@
 
 
     <!--==========================
-                                                                                                                                                                                                                                                                                            LISTING PAGE START
-                                                                                                                                                                                                                                                                                        ===========================-->
+                                                                                                                                                                                                                                                                                                LISTING PAGE START
+                                                                                                                                                                                                                                                                                            ===========================-->
 @endsection

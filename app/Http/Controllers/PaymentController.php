@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
+use Razorpay\Api\Api as RazorpayApi;
 
 class PaymentController extends Controller
 {
@@ -176,5 +177,47 @@ class PaymentController extends Controller
     function stripeCancel(): RedirectResponse
     {
         return redirect()->route('payment.cancel');
+    }
+
+    /** Razorpay Payment */
+
+    function razorPayRedirect(): View
+    {
+
+        $package = Package::findOrFail(Session::get('selected_package_id'));
+        return view('frontend.pages.razorpay-redirect', compact('package'));
+    }
+
+    function payWithRazorpay(Request $request)
+    {
+        $api = new RazorpayApi(config('payment.razorpay_key'), config('payment.razorpay_secret_key'));
+
+        if ($request->has('razorpay_payment_id') &&  $request->filled('razorpay_payment_id')) {
+            $packageId = session()->get('selected_package_id');
+            $package = Package::find($packageId);
+
+            $totalPayableAmount = $package->price * config('payment.razorpay_currency_rate') * 100;
+
+            try {
+                $response = $api->payment
+                    ->fetch($request->razorpay_payment_id)
+                    ->capture(array('amount' => $totalPayableAmount));
+            } catch (\Exception $e) {
+                logger($e);
+                return redirect()->route('payment.cancel')->withErrors(['error' => $e->getMessage()]);
+            }
+
+            if ($response->status === 'captured') {
+                $paymentInfo = [
+                    'transaction_id' => $response->id,
+                    'payment_method' => 'Razorpay',
+                    'paid_amount' => $response->amount / 100,
+                    'paid_currency' => $response->currency,
+                    'payment_status' => 'Completed'
+                ];
+                CreateOrder::dispatch($paymentInfo);
+                return redirect()->route('payment.success');
+            }
+        }
     }
 }

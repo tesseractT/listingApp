@@ -79,6 +79,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stripe/cancel', [PaymentController::class, 'stripeCancel'])->name('stripe.cancel');
 
 
+    /** Razorpay Payment Routes  */
+    Route::get('/razorpay/redirect', [PaymentController::class, 'razorPayRedirect'])->name('razorpay.redirect');
+    Route::post('/razorpay/payment', [PaymentController::class, 'payWithRazorpay'])->name('razorpay.payment');
 });
 
 require __DIR__ . '/auth.php';

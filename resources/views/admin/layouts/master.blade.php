@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/components.css') }}">
 
+    @stack('styles')
+
     {{-- @vite(['resources/js/app.js', 'resources/css/app.css']) --}}
 
 </head>
