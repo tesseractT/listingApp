@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                                    BREADCRUMB PART START
-                                                                                                ===========================-->
+                                                                                                                BREADCRUMB PART START
+                                                                                                            ===========================-->
     <div id="breadcrumb_part">
         <div class="bread_overlay">
             <div class="container">
@@ -21,13 +21,13 @@
         </div>
     </div>
     <!--==========================
-                                                                                                    BREADCRUMB PART END
-                                                                                                ===========================-->
+                                                                                                                BREADCRUMB PART END
+                                                                                                            ===========================-->
 
 
     <!--==========================
-                                                                                                    PAYMENT PAGE START
-                                                                                                ===========================-->
+                                                                                                                PAYMENT PAGE START
+                                                                                                            ===========================-->
     <section id="wsus__custom_page">
         <div class="container">
             <div class="row">
@@ -42,23 +42,22 @@
                                     </a>
                                 </div>
                             @endif
-
-
-
-
-                            <div class="col-lg-3 col-6 col-sm-4">
-                                <a class="wsus__single_payment" href="{{ route('stripe.payment') }}">
-                                    <img src="{{ asset('default/stripe-logo.png') }}" alt="payment method"
-                                        class="img-fluid w-100">
-                                </a>
-                            </div>
-                            <div class="col-lg-3 col-6 col-sm-4">
-                                <a class="wsus__single_payment" href="{{ route('razorpay.redirect') }}">
-                                    <img src="{{ asset('default/razorpay-logo.png') }}" alt="payment method"
-                                        class="img-fluid w-100">
-                                </a>
-                            </div>
-
+                            @if (config('payment.stripe_status') === 'active')
+                                <div class="col-lg-3 col-6 col-sm-4">
+                                    <a class="wsus__single_payment" href="{{ route('stripe.payment') }}">
+                                        <img src="{{ asset('default/stripe-logo.png') }}" alt="payment method"
+                                            class="img-fluid w-100">
+                                    </a>
+                                </div>
+                            @endif
+                            @if (config('payment.razorpay_status') === 'active')
+                                <div class="col-lg-3 col-6 col-sm-4">
+                                    <a class="wsus__single_payment" href="{{ route('razorpay.redirect') }}">
+                                        <img src="{{ asset('default/razorpay-logo.png') }}" alt="payment method"
+                                            class="img-fluid w-100">
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -139,6 +138,6 @@
         </div>
     </div>
     <!--==========================
-                                                                                                    CUSTOM PAGE END
-                                                                                                ===========================-->
+                                                                                                                CUSTOM PAGE END
+                                                                                                            ===========================-->
 @endsection
