@@ -9,6 +9,8 @@ use App\Models\Listing;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use App\Rules\MaxVideos;
+use App\Models\Subscription;
 
 class AgentListingVideoGalleryController extends Controller
 {
@@ -19,8 +21,9 @@ class AgentListingVideoGalleryController extends Controller
     {
         $videos = ListingVideoGallerry::where('listing_id', request()->id)->get();
         $listingTitle = Listing::select('title')->where('id', request()->id)->first();
+        $subscription = Subscription::with('package')->where('user_id', auth()->id())->first();
 
-        return view('frontend.dashboard.listing.video-gallery.index', compact('videos', 'listingTitle'));
+        return view('frontend.dashboard.listing.video-gallery.index', compact('videos', 'listingTitle', 'subscription'));
     }
 
     /**
@@ -30,8 +33,8 @@ class AgentListingVideoGalleryController extends Controller
     {
         $request->validate(
             [
-                'video_url' => ['required', 'url', 'unique:listing_video_gallerries,video_url'],
-                'listing_id' => ['required']
+                'video_url' => ['required', 'url'],
+                'listing_id' => ['required', new MaxVideos]
             ],
             [
                 'video_url.unique' => 'This video is already added to the gallery.'

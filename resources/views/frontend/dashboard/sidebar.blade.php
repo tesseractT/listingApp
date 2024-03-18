@@ -3,7 +3,7 @@
     <a href="dsahboard.html" class="dash_logo"><img src="{{ asset(auth()->user()->avatar) }}" alt="logo"
             class="img-fluid"></a>
     <ul class="dashboard_link">
-        <li><a class="active" href="dsahboard.html"><i class="fas fa-tachometer"></i>Dashboard</a></li>
+        <li><a class="active" href="{{ route('user.dashboard') }}"><i class="fas fa-tachometer"></i>Dashboard</a></li>
         <li><a href="{{ route('user.listing.index') }}"><i class="fas fa-list-ul"></i> My Listing</a></li>
         <li><a href="{{ route('user.listing.create') }}"><i class="fal fa-plus-circle"></i> Create
                 Listing</a></li>

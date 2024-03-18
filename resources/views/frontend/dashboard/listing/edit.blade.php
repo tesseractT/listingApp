@@ -156,9 +156,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>
-                                        Amenities
-                                    </label>
+                                    @if ($subscription->package->num_of_amenities === -1)
+                                        <label class="mb-2" for="">Amenities <code>(Unlimited Amenities)
+                                            </code></label>
+                                    @else
+                                        <label class="mb-2" for="">Amenities <code>(Maximum:
+                                                {{ $subscription->package->num_of_amenities }} Entry)</code></label>
+                                    @endif
                                     <select class="form-control select2" name="amenities[]" multiple="">
                                         @foreach ($amenities as $amenity)
                                             <option value="{{ $amenity->id }}">{{ $amenity->name }}</option>
@@ -183,7 +187,7 @@
                                     <textarea name="seo_description" class="form-control">{!! $listing->seo_description !!}</textarea>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Status <span class="text-danger">*</span></label>
                                             <select name="status" class="form-control" required>
@@ -193,7 +197,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Is Featured ? <span class="text-danger">*</span></label>
                                             <select name="is_featured" class="form-control" required>
@@ -203,16 +207,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Is Verified ? <span class="text-danger">*</span></label>
-                                            <select name="is_verified" class="form-control" required>
-                                                <option @selected($listing->is_verified === 0) value="0">No</option>
-                                                <option @selected($listing->is_verified === 1) value="1">Yes</option>
-                                            </select>
-                                        </div>
 
-                                    </div>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="read_btn mt-4">Update</button>

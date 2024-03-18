@@ -25,7 +25,14 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="">YouTube Video Url <code>*</code></label>
+
+                                    @if ($subscription->package->num_of_videos === -1)
+                                        <label for="">YouTube Video Url
+                                            <code>(Unlimited Videos)</code></label>
+                                    @else
+                                        <label for="">YouTube Video Url
+                                            <code>({{ $subscription->package->num_of_videos }} Max Videos) *</code></label>
+                                    @endif
                                     <input type="text" class="form-control" name="video_url">
                                     <input type="hidden" class="form-control" name="listing_id"
                                         value="{{ request()->id }}">

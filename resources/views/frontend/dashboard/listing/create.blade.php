@@ -44,6 +44,7 @@
                                 <div class="form-group">
                                     <label for="">Title <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="title" value="" required>
+                                    <input type="hidden" name="listing" value="0">
                                 </div>
 
                                 <div class="row">
@@ -100,7 +101,8 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Facebook Link</label>
-                                            <input type="text" class="form-control" name="facebook_link" value="">
+                                            <input type="text" class="form-control" name="facebook_link"
+                                                value="">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -131,9 +133,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>
-                                        Amenities
-                                    </label>
+                                    @if ($subscription->package->num_of_amenities === -1)
+                                        <label class="mb-2" for="">Amenities <code>(Unlimited
+                                                Amenities)</code></label>
+                                    @else
+                                        <label class="mb-2" for="">Amenities <code>(Maximum:
+                                                {{ $subscription->package->num_of_amenities }} Entry)</code></label>
+                                    @endif
+
                                     <select class="form-control select2" name="amenities[]" multiple="">
                                         @foreach ($amenities as $amenity)
                                             <option value="{{ $amenity->id }}">{{ $amenity->name }}</option>
@@ -157,7 +164,7 @@
                                     <textarea name="seo_description" class="form-control"></textarea>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Status <span class="text-danger">*</span></label>
                                             <select name="status" class="form-control" required>
@@ -167,7 +174,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Is Featured ? <span class="text-danger">*</span></label>
                                             <select name="is_featured" class="form-control" required>
@@ -177,16 +184,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Is Verified ? <span class="text-danger">*</span></label>
-                                            <select name="is_verified" class="form-control" required>
-                                                <option value="0">No</option>
-                                                <option value="1">Yes</option>
-                                            </select>
-                                        </div>
 
-                                    </div>
                                 </div>
 
                                 <div class="col-12">

@@ -25,12 +25,21 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="mb-2" for="">Image <code>(Multi Image Supported)</code></label>
+                                    @if ($subscription->package->num_of_photos === -1)
+                                        <label class="mb-2" for="">Image <code>(Unlimited Images) (Multi Image
+                                                Supported)</code></label>
+                                    @else
+                                        <label class="mb-2" for="">Image <code>(Max is
+                                                {{ $subscription->package->num_of_photos }} images) (Multi Image
+                                                Supported)</code></label>
+                                    @endif
+
+
                                     <input type="file" name="images[]" class="form-control" multiple>
                                     <input type="hidden" name="listing_id" value="{{ request()->id }}">
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="read_btn mt-4">Create</button>
+                                    <button type="submit" class="read_btn mt-4">Upload</button>
                                 </div>
                             </form>
                         </div>

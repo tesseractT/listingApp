@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Listing;
 use App\Models\ListingAmenity;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Traits\FileUploadTrait;
@@ -39,7 +40,8 @@ class AgentListingController extends Controller
         $categories = Category::all();
         $locations = Location::all();
         $amenities = Amenity::all();
-        return view('frontend.dashboard.listing.create', compact('categories', 'locations', 'amenities'));
+        $subscription = Subscription::with('package')->where('user_id', auth()->id())->first();
+        return view('frontend.dashboard.listing.create', compact('categories', 'locations', 'amenities', 'subscription'));
     }
 
     /**
@@ -76,7 +78,7 @@ class AgentListingController extends Controller
         $listing->seo_description = $request->seo_description;
         $listing->status = $request->status;
         $listing->is_featured = $request->is_featured;
-        $listing->is_verified = $request->is_verified;
+        $listing->is_verified = 0;
         $listing->expiry_date = now()->addDays(30);
         $listing->save();
 
@@ -102,11 +104,12 @@ class AgentListingController extends Controller
             return Redirect::back()->with('error', 'You are not authorized to edit this listing');
         }
         $listingAmenities = ListingAmenity::where('listing_id', $listing->id)->pluck('amenity_id')->toArray();
+        $subscription = Subscription::with('package')->where('user_id', auth()->id())->first();
 
         $categories = Category::all();
         $locations = Location::all();
         $amenities = Amenity::all();
-        return view('frontend.dashboard.listing.edit', compact('listing', 'categories', 'locations', 'amenities', 'listingAmenities'));
+        return view('frontend.dashboard.listing.edit', compact('listing', 'categories', 'locations', 'amenities', 'listingAmenities', 'subscription'));
     }
 
     /**
@@ -141,9 +144,9 @@ class AgentListingController extends Controller
         $listing->seo_description = $request->seo_description;
         $listing->status = $request->status;
         $listing->is_featured = $request->is_featured;
-        $listing->is_verified = $request->is_verified;
+        $listing->is_verified = 0;
         $listing->expiry_date = now()->addDays(30);
-        $listing->is_approved = 0;
+        // $listing->is_approved = 0;
         $listing->save();
 
         ListingAmenity::where('listing_id', $listing->id)->delete();

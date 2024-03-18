@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                   @include('frontend.dashboard.sidebar')
+                    @include('frontend.dashboard.sidebar')
                 </div>
                 <div class="col-lg-9">
                     <div class="dashboard_content">
@@ -46,43 +46,49 @@
                                                 <tbody>
                                                     <tr>
                                                         <td class="active_left">Package name</td>
-                                                        <td class="package_right">Free</td>
+                                                        <td class="package_right">{{ $subscription->package->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="active_left">Price</td>
-                                                        <td class="package_right">$50</td>
+                                                        <td class="package_right">
+                                                            {{ currencyPosition($subscription->package->price) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="active_left">Purchase Date</td>
-                                                        <td class="package_right">15 October, 2021</td>
+                                                        <td class="package_right">
+                                                            {{ date('d F, Y', strtotime($subscription->purchase_date)) }}
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="active_left">Expired Date</td>
-                                                        <td class="package_right">14 November, 2021</td>
+                                                        <td class="active_left">Expiry Date</td>
+                                                        <td class="package_right">
+                                                            {{ date('d F, Y', strtotime($subscription->expiry_date)) }}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="active_left">Package name</td>
-                                                        <td class="package_right">Free</td>
-                                                    </tr>
+
                                                     <tr>
                                                         <td class="active_left">Maximum Listing </td>
-                                                        <td class="package_right">10</td>
+                                                        <td class="package_right">
+                                                            {{ $subscription->package->num_of_listings }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="active_left">Maximum Aminities</td>
-                                                        <td class="package_right">5</td>
+                                                        <td class="package_right">
+                                                            {{ $subscription->package->num_of_amenities }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="active_left">Maximum Photo</td>
-                                                        <td class="package_right">5</td>
+                                                        <td class="package_right">
+                                                            {{ $subscription->package->num_of_photos }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="active_left">Maximum Video</td>
-                                                        <td class="package_right">10</td>
+                                                        <td class="package_right">
+                                                            {{ $subscription->package->num_of_videos }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="active_left">Featured Listing Available</td>
-                                                        <td class="package_right">no</td>
+                                                        <td class="package_right">
+                                                            {{ $subscription->package->num_of_featured_listing }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
