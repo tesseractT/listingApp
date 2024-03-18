@@ -77,6 +77,22 @@
                                                                         value="{{ config('settings.site_phone') }}">
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="">Site Time Zone</label>
+                                                                    <select name="site_timezone"
+                                                                        class="form-control select2">
+                                                                        <option value="">Select</option>
+                                                                        <option value="UTC">UTC</option>
+                                                                        @foreach (config('time-zone') as $key => $timezone)
+                                                                            <option @selected($key === config('settings.site_timezone'))
+                                                                                value="{{ $key }}">
+                                                                                {{ $key }} - {{ $timezone }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label for=""> Site Default Currency</label>
@@ -105,7 +121,8 @@
                                                                     <label for="">Site Currency Position</label>
                                                                     <select name="site_currency_position"
                                                                         class="form-control">
-                                                                        <option @selected(config('settings.site_currency_position') === 'left') value="left">
+                                                                        <option @selected(config('settings.site_currency_position') === 'left')
+                                                                            value="left">
                                                                             Left</option>
                                                                         <option @selected(config('settings.site_currency_position') === 'right')
                                                                             value="right">Right</option>

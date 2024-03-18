@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Services\SettingsService;
 use App\Models\Setting;
+use Artisan;
 
 class SettingController extends Controller
 {
@@ -25,6 +26,7 @@ class SettingController extends Controller
             'site_default_currency' => ['required', 'max:3'],
             'site_currency_icon' => ['required'],
             'site_currency_position' => ['required', 'in:left,right'],
+            'site_timezone' => ['required', 'max:255'],
         ]);
 
         foreach ($validatedData as $key => $value) {
@@ -36,6 +38,8 @@ class SettingController extends Controller
 
         $settingsService = app()->make(SettingsService::class);
         $settingsService->clearCachedSettings();
+
+        Artisan::call('config:cache');
 
         return back()->with('success', 'General settings updated successfully');
     }

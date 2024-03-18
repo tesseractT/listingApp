@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                            BREADCRUMB PART START
-                                                                                                                                                                                                                                                                                                                                                        ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                        BREADCRUMB PART START
+                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
     <div id="breadcrumb_part"
         style="background: url({{ $listing->thumbnail_image }});
     background-size: cover; background-repeat: no-repeat; background-position: center;
@@ -24,13 +24,13 @@
         </div>
     </div>
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                            BREADCRUMB PART END
-                                                                                                                                                                                                                                                                                                                                                        ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                        BREADCRUMB PART END
+                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
 
 
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                            LISTING DETAILS START
-                                                                                                                                                                                                                                                                                                                                                        ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                        LISTING DETAILS START
+                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
     <section id="listing_details">
         <div class="container">
             <div class="row">
@@ -61,8 +61,13 @@
                                         <li><a href="#"><i class="far fa-star"></i> Featured</a></li>
                                     @endif
                                     <li><a href="#"><i class="fal fa-heart"></i> Add to Favorite</a></li>
-                                    <li><a href="#"><i class="fal fa-eye"></i> 194</a></li>
-                                    <li><a href="#">Open</a></li>
+                                    <li><a href="#"><i class="fal fa-eye"></i> {{ $listing->views }}</a></li>
+                                    @if ($isOpen == 'open')
+                                        <li><a href="javascript:;"><i class="fal fa-clock"></i> Open</a></li>
+                                    @elseif ($isOpen == 'closed')
+                                        <li><a href="javascript:;"><i class="fal fa-clock"></i> Closed</a></li>
+                                    @endif
+
                                 </ul>
                             </div>
                         </div>
@@ -256,59 +261,62 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="listing_det_side_open_hour">
-                                    <h5>Opening Hours</h5>
-                                    @foreach ($listing->schedules as $schedules)
-                                        <p>{{ $schedules->day }} <span>{{ $schedules->start_time }} -
-                                                {{ $schedules->end_time }}</span></p>
-                                        @if ($loop->iteration == 7)
-                                        @break
-                                    @endif
-                                @endforeach
-
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="listing_det_side_contact">
-                                <h5>quick contact</h5>
-                                <form>
-                                    <form type="text" placeholder="Name*">
-                                        <input type="email" placeholder="Email*">
-                                        <input type="text" placeholder="Phone*">
-                                        <input type="text" placeholder="Subject*">
-                                        <textarea cols="3" rows="5" placeholder="Message*"></textarea>
-                                        <button type="submit" class="read_btn">send</button>
-                                    </form>
-                            </div>
-                        </div>
-                        @if (count($similarListings) > 0)
-                            <div class="col-12">
-                                <div class="listing_det_side_list">
-                                    <h5>Similar Listing</h5>
-                                    @foreach ($similarListings as $similarListing)
-                                        <a href="{{ route('listing.show', $similarListing->slug) }}"
-                                            class="sidebar_blog_single">
-                                            <div class="sidebar_blog_img">
-                                                <img src="{{ asset($similarListing->image) }}"
-                                                    alt="{{ $similarListing->title }}" class="imgofluid w-100">
-                                            </div>
-                                            <div class="sidebar_blog_text">
-                                                <h5>{{ truncateText($similarListing->title) }}</h5>
-                                                <p> <span>{{ date('m d Y', strtotime($similarListing->created_at)) }}
-                                                    </span> 2
-                                                    Comment </p>
-                                            </div>
-                                        </a>
+                            @if (count($listing->schedules) > 0)
+                                <div class="col-12">
+                                    <div class="listing_det_side_open_hour">
+                                        <h5>Opening Hours</h5>
+                                        @foreach ($listing->schedules as $schedules)
+                                            <p>{{ $schedules->day }} <span>{{ $schedules->start_time }} -
+                                                    {{ $schedules->end_time }}</span></p>
+                                            @if ($loop->iteration == 7)
+                                            @break
+                                        @endif
                                     @endforeach
+
                                 </div>
-                            </div>
                         @endif
 
                     </div>
+                    <div class="col-12">
+                        <div class="listing_det_side_contact">
+                            <h5>quick contact</h5>
+                            <form>
+                                <form type="text" placeholder="Name*">
+                                    <input type="email" placeholder="Email*">
+                                    <input type="text" placeholder="Phone*">
+                                    <input type="text" placeholder="Subject*">
+                                    <textarea cols="3" rows="5" placeholder="Message*"></textarea>
+                                    <button type="submit" class="read_btn">send</button>
+                                </form>
+                        </div>
+                    </div>
+                    @if (count($similarListings) > 0)
+                        <div class="col-12">
+                            <div class="listing_det_side_list">
+                                <h5>Similar Listing</h5>
+                                @foreach ($similarListings as $similarListing)
+                                    <a href="{{ route('listing.show', $similarListing->slug) }}"
+                                        class="sidebar_blog_single">
+                                        <div class="sidebar_blog_img">
+                                            <img src="{{ asset($similarListing->image) }}"
+                                                alt="{{ $similarListing->title }}" class="imgofluid w-100">
+                                        </div>
+                                        <div class="sidebar_blog_text">
+                                            <h5>{{ truncateText($similarListing->title) }}</h5>
+                                            <p> <span>{{ date('m d Y', strtotime($similarListing->created_at)) }}
+                                                </span> 2
+                                                Comment </p>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <!--==========================
