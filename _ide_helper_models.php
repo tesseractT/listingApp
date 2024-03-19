@@ -69,6 +69,32 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Claim
+ *
+ * @property int $id
+ * @property int $listing_id
+ * @property string $name
+ * @property string $email
+ * @property string $claim
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Listing $listing
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim whereClaim($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim whereListingId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Claim whereUpdatedAt($value)
+ */
+	class Claim extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Hero
  *
  * @property int $id

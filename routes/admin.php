@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\ClaimController;
 use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\ListingImageGalleryController;
 use App\Http\Controllers\Admin\ListingVideoGalleryController;
@@ -73,6 +74,10 @@ Route::group([
     Route::get('/listing-review', [ReviewController::class, 'index'])->name('listing-review.index');
     Route::get('/listing-review/{id}', [ReviewController::class, 'updateStatus'])->name('listing-review.update');
     Route::delete('/listing-review/{id}', [ReviewController::class, 'destroy'])->name('listing-review.destroy');
+
+    /** Listing Claim Routes  */
+    Route::get('/listing-claims', [ClaimController::class, 'index'])->name('listing-claims.index');
+    Route::delete('/listing-claims/{id}', [ClaimController::class, 'destroy'])->name('listing-claims.destroy');
 
     /** Package Routes  */
     Route::resource('/package', PackageController::class);

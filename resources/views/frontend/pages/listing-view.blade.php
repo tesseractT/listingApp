@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        BREADCRUMB PART START
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            BREADCRUMB PART START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ===========================-->
     <div id="breadcrumb_part"
         style="background: url({{ $listing->thumbnail_image }});
     background-size: cover; background-repeat: no-repeat; background-position: center;
@@ -24,13 +24,13 @@
         </div>
     </div>
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        BREADCRUMB PART END
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            BREADCRUMB PART END
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ===========================-->
 
 
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        LISTING DETAILS START
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            LISTING DETAILS START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ===========================-->
     <section id="listing_details">
         <div class="container">
             <div class="row">
@@ -256,14 +256,21 @@
                     <div class="col-12">
                         <div class="listing_det_side_contact">
                             <h5>quick contact</h5>
-                            <form>
-                                <form type="text" placeholder="Name*">
-                                    <input type="email" placeholder="Email*">
-                                    <input type="text" placeholder="Phone*">
-                                    <input type="text" placeholder="Subject*">
-                                    <textarea cols="3" rows="5" placeholder="Message*"></textarea>
-                                    <button type="submit" class="read_btn">send</button>
-                                </form>
+                            <form type="text" placeholder="Name*">
+                                <input type="email" placeholder="Email*">
+                                <input type="text" placeholder="Phone*">
+                                <input type="text" placeholder="Subject*">
+                                <textarea cols="3" rows="5" placeholder="Message*"></textarea>
+                                <button type="submit" class="read_btn">send</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="listing_det_side_contact">
+                            <h5>Claim listing</h5>
+                            <button type="submit" class="read_btn" data-bs-toggle="modal"
+                                data-bs-target="#claimModal">Claim</button>
+
                         </div>
                     </div>
                     @if (count($similarListings) > 0)
@@ -295,6 +302,32 @@
     </div>
     </div>
 </section>
+
+<!--=============Claim MODAL POPUP==============-->
+<section id="wsus__map_popup">
+    <div class="modal fade" id="claimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="btn-close popup_close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="far fa-times"></i></button>
+                <div class="modal-body modal-listing-content listing_det_side_contact" style="box-shadow: none">
+                    <h5 class="mb-4">Claim Listing</h5>
+                    <form action="{{ route('submit-claim') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="listing_id" value="{{ $listing->id }}">
+                        <input type="text" placeholder="Name*" name="name"
+                            value="{{ auth()->user()?->name }}">
+                        <input type="email" placeholder="Email*" name="email"
+                            value="{{ auth()->user()?->email }}">
+                        <textarea cols="3" rows="5" placeholder="Claim*" name="claim"></textarea>
+                        <button type="submit" class="">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--=============Claim MODAL POPUP==============-->
 <!--==========================
                                                                                                                                                                                                                     LISTING DETAILS END
                                                                                                                                                                                                                 ===========================-->

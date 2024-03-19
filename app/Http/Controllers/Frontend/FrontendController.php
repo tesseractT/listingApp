@@ -14,6 +14,7 @@ use App\Events\CreateOrder;
 use Illuminate\Http\Request;
 use App\Models\ListingSchedule;
 use App\Http\Controllers\Controller;
+use App\Models\Claim;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 
@@ -169,5 +170,29 @@ class FrontendController extends Controller
         $review->save();
 
         return back()->with('success', 'Review Submitted Successfully');
+    }
+
+    function submitClaim(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'claim' => ['required', 'string', 'max:500'],
+            'listing_id' => ['required', 'integer', 'exists:listings,id']
+        ]);
+
+        $prevClaim = Claim::where(['listing_id' => $request->listing_id, 'email' => $request->email])->exists();
+        if ($prevClaim) {
+            throw ValidationException::withMessages(['claim' => 'You have already submitted a claim for this listing, please wait while we finish our investigations.']);
+        }
+
+        $claim = new Claim();
+        $claim->name = $request->name;
+        $claim->email = $request->email;
+        $claim->claim = $request->claim;
+        $claim->listing_id = $request->listing_id;
+        $claim->save();
+
+        return back()->with('success', 'Claim Submitted Successfully');
     }
 }

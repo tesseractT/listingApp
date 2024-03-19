@@ -217,6 +217,9 @@
                     <li class="{{ setSidebarActive(['admin.listing-review.index']) }}"><a class="nav-link"
                             href="{{ route('admin.listing-review.index') }}">Listing Reviews</a>
                     </li>
+                    <li class="{{ setSidebarActive(['admin.listing-claims.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.listing-claims.index') }}">Claims</a>
+                    </li>
                 </ul>
             </li>
             <li class="dropdown {{ setSidebarActive(['admin.package.index']) }}">
