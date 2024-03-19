@@ -14,6 +14,7 @@ use App\Events\CreateOrder;
 use Illuminate\Http\Request;
 use App\Models\ListingSchedule;
 use App\Http\Controllers\Controller;
+use App\Models\Amenity;
 use App\Models\Claim;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
@@ -24,6 +25,7 @@ class FrontendController extends Controller
     {
         $hero = Hero::first();
         $categories = Category::where('status', 1,)->get();
+        $locations = Location::where('status', 1)->get();
         $packages = Package::where('status', 1)->where('show_at_home', 1)->limit(3)->get();
         $featuredCategories = Category::withCount(['listings' => function ($query) {
             $query->where('is_approved', 1);
@@ -55,7 +57,8 @@ class FrontendController extends Controller
                 'packages',
                 'featuredCategories',
                 'featuredLocations',
-                'featuredListings'
+                'featuredListings',
+                'locations'
             )
         );
     }
@@ -70,13 +73,38 @@ class FrontendController extends Controller
             }])
             ->with(['location', 'category'])->where(['status' => 1, 'is_approved' => 1]);
 
-        $listings->when($request->has('category'), function ($query) use ($request) {
+        $listings->when($request->has('category') && $request->filled('category'), function ($query) use ($request) {
             return $query->whereHas('category', function ($query) use ($request) {
                 $query->where('slug', $request->category);
             });
         });
+
+        $listings->when($request->has('search') && $request->filled('search'), function ($query) use ($request) {
+            $query->where(function ($subQuery) use ($request) {
+                $subQuery->where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%');
+            });
+        });
+
+        $listings->when($request->has('location') && $request->filled('location'), function ($query) use ($request) {
+            $query->whereHas('location', function ($subQuery) use ($request) {
+                $subQuery->where('slug', $request->location);
+            });
+        });
+
+        $listings->when($request->has('amenity') && is_array($request->amenity), function ($query) use ($request) {
+            $amenityIds  = Amenity::whereIn('slug', $request->amenity)->pluck('id');
+
+            $query->whereHas('amenities', function ($subQuery) use ($amenityIds) {
+                $subQuery->whereIn('amenity_id', $amenityIds);
+            });
+        });
+
         $listings = $listings->latest()->paginate(12);
-        return view('frontend.pages.listings', compact('listings'));
+        $categories = Category::where('status', 1)->get();
+        $locations = Location::where('status', 1)->get();
+        $amenities = Amenity::where('status', 1)->get();
+        return view('frontend.pages.listings', compact('listings', 'categories', 'locations', 'amenities'));
     }
 
     function listingModal(string $id)

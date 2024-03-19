@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                                            BREADCRUMB PART START
-                                                                                                        ===========================-->
+                                                                                                                                                                                                                                        BREADCRUMB PART START
+                                                                                                                                                                                                                                    ===========================-->
     <div id="breadcrumb_part">
         <div class="bread_overlay">
             <div class="container">
@@ -21,100 +21,55 @@
         </div>
     </div>
     <!--==========================
-                                                                                                            BREADCRUMB PART END
-                                                                                                        ===========================-->
+                                                                                                                                                                                                                                        BREADCRUMB PART END
+                                                                                                                                                                                                                                    ===========================-->
 
 
     <!--==========================
-                                                                                                            LISTING PAGE START
-                                                                                                        ===========================-->
+                                                                                                                                                                                                                                        LISTING PAGE START
+                                                                                                                                                                                                                                    ===========================-->
     <section id="listing_grid" class="grid_view">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <form>
+                    <form action="{{ route('listings') }}" method="GET">
                         <div class="listing_grid_sidbar">
                             <div class="sidebar_line">
-                                <input type="text" placeholder="Search">
+                                <input type="text" placeholder="Search" name="search" value="{{ request()->search }}">
                                 <button type="submit"><i class="far fa-search"></i></button>
                             </div>
                             <div class="sidebar_line_select">
-                                <select class="select_2" name="state">
-                                    <option value="">categorys</option>
-                                    <option value="">category 1</option>
-                                    <option value="">category 2</option>
-                                    <option value="">category 3</option>
-                                    <option value="">category 4</option>
-                                    <option value="">category 5</option>
+                                <select class="select_2" name="category">
+                                    <option>categories</option>
+                                    @foreach ($categories as $category)
+                                        <option @selected($category->slug == request()->category) value="{{ $category->slug }}">
+                                            {{ $category->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="sidebar_line_select">
-                                <select class="select_2" name="state">
-                                    <option value="">location</option>
-                                    <option value="">location 1</option>
-                                    <option value="">location 2</option>
-                                    <option value="">location 3</option>
-                                    <option value="">location 4</option>
-                                    <option value="">location 5</option>
+                                <select class="select_2" name="location">
+                                    <option>location</option>
+                                    @foreach ($locations as $location)
+                                        <option @selected($location->slug == request()->location) value="{{ $location->slug }}">
+                                            {{ $location->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="wsus__pro_check">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckIndeterminate4">
-                                    <label class="form-check-label" for="flexCheckIndeterminate4">
-                                        Heating
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckIndeterminate5">
-                                    <label class="form-check-label" for="flexCheckIndeterminate5">
-                                        Smoking Allow
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckIndeterminate6">
-                                    <label class="form-check-label" for="flexCheckIndeterminate6">
-                                        Icon
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckIndeterminate7">
-                                    <label class="form-check-label" for="flexCheckIndeterminate7">
-                                        Parking
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckIndeterminate">
-                                    <label class="form-check-label" for="flexCheckIndeterminate">
-                                        Air Condition
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckIndeterminate1">
-                                    <label class="form-check-label" for="flexCheckIndeterminate1">
-                                        Internet
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckIndeterminate2">
-                                    <label class="form-check-label" for="flexCheckIndeterminate2">
-                                        Terrace
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckIndeterminate3">
-                                    <label class="form-check-label" for="flexCheckIndeterminate3">
-                                        Wi-Fi
-                                    </label>
-                                </div>
+
+                                @foreach ($amenities as $amenity)
+                                    <div class="form-check">
+                                        <input @checked(in_array($amenity->slug, request()->has('amenities') && is_array(request()->amenities) ? request()->amenities : [])) class="form-check-input" type="checkbox"
+                                            value="{{ $amenity->slug }}" name="amenities[]"
+                                            id="flexCheckIndeterminate-{{ $amenity->id }}">
+                                        <label class="form-check-label" for="flexCheckIndeterminate-{{ $amenity->id }}">
+                                            {{ $amenity->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+
+
                             </div>
                             <button class="read_btn" type="submit">search</button>
                         </div>
@@ -170,6 +125,6 @@
 
 
     <!--==========================
-                                                                                                            LISTING PAGE START
-                                                                                                        ===========================-->
+                                                                                                                                                                                                                                        LISTING PAGE START
+                                                                                                                                                                                                                                    ===========================-->
 @endsection

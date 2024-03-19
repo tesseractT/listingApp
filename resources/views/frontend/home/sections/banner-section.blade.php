@@ -10,33 +10,31 @@
                 </div>
 
                 <div class="col-xl-5 col-lg-5">
-                    <form>
-                        <h3>Find the Best Place Title</h3>
+                    <form action="{{ route('listings') }}" method="GET">
+
+                        <h3>Find the Best Place For You</h3>
                         <div class="wsus__search_area">
-                            <input type="text" placeholder="What we are looking for?">
+                            <input type="text" placeholder="What we are looking for?" name="search">
                         </div>
                         <div class="wsus__search_area">
-                            <select class="select_2" name="state">
-                                <option value="">categories</option>
-                                <option value="">categories 1</option>
-                                <option value="">categories 2</option>
-                                <option value="">categories 3</option>
-                                <option value="">categories 4</option>
-                                <option value="">categories 5</option>
+                            <select class="select_2" name="category">
+                                <option value="">Select Category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->slug }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="wsus__search_area">
-                            <select class="select_2" name="state">
-                                <option value="">location</option>
-                                <option value="">location 1</option>
-                                <option value="">location 2</option>
-                                <option value="">location 3</option>
-                                <option value="">location 4</option>
-                                <option value="">location 5</option>
+                            <select class="select_2" name="location">
+                                <option value="">Select Location</option>
+                                @foreach ($locations as $location)
+                                    <option value="{{ $location->slug }}">{{ $location->name }}</option>
+                                @endforeach
+
                             </select>
                         </div>
                         <div class="wsus__search_area m-0">
-                            <a href="#" class="read_btn">search</a>
+                            <button type="submit" class="read_btn">search</button>
                         </div>
                     </form>
                 </div>
