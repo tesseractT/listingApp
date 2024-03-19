@@ -131,6 +131,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ListingImageGallerry> $gallery
  * @property-read int|null $gallery_count
  * @property-read \App\Models\Location $location
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Review> $reviews
+ * @property-read int|null $reviews_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ListingSchedule> $schedules
  * @property-read int|null $schedules_count
  * @property-read \App\Models\User $user
@@ -399,6 +401,35 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting whereValue($value)
  */
 	class PaymentSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Review
+ *
+ * @property int $id
+ * @property int $listing_id
+ * @property int $user_id
+ * @property string $review
+ * @property int $rating
+ * @property int $is_approved
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Listing $listing
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Review newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Review newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Review query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereIsApproved($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereListingId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereReview($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereUserId($value)
+ */
+	class Review extends \Eloquent {}
 }
 
 namespace App\Models{

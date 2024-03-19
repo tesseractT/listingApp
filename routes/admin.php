@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PendingListingController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\PaymentSettingController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\OrderController;
 
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('guest');
@@ -67,6 +68,11 @@ Route::group([
     Route::get('/listing-schedule/{id}/edit', [ListingScheduleController::class, 'edit'])->name('listing-schedule.edit');
     Route::put('/listing-schedule/{id}', [ListingScheduleController::class, 'update'])->name('listing-schedule.update');
     Route::delete('/listing-schedule/{id}', [ListingScheduleController::class, 'destroy'])->name('listing-schedule.destroy');
+
+    /** Listing Review Routes  */
+    Route::get('/listing-review', [ReviewController::class, 'index'])->name('listing-review.index');
+    Route::get('/listing-review/{id}', [ReviewController::class, 'updateStatus'])->name('listing-review.update');
+    Route::delete('/listing-review/{id}', [ReviewController::class, 'destroy'])->name('listing-review.destroy');
 
     /** Package Routes  */
     Route::resource('/package', PackageController::class);

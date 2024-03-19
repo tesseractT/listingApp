@@ -29,6 +29,10 @@ Route::get('listing/{slug}', [FrontendController::class, 'showListing'])->name('
 Route::get('packages', [FrontendController::class, 'showPackages'])->name('packages');
 Route::get('checkout/{id}', [FrontendController::class, 'checkout'])->name('checkout.index');
 
+/** Review Route  */
+Route::post('listing-review', [FrontendController::class, 'submitReview'])->name('listing-review.store')->middleware('auth');
+
+
 
 
 Route::middleware('auth')->group(function () {

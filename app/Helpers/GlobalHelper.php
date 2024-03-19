@@ -44,7 +44,7 @@ if (!function_exists('truncateText')) {
 /** Currency Position */
 
 if (!function_exists('currencyPosition')) {
-    function currencyPosition(int $amount): ?string
+    function currencyPosition($amount): ?string
     {
         if (config('settings.site_currency_position') === 'left') {
             return config('settings.site_currency_icon') . $amount;

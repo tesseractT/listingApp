@@ -25,12 +25,14 @@
                             data-bs-target="#exampleModal2" href="#"><i class="fas fa-info"></i></a>
                         <div class="wsus__featured_single_text">
                             <p class="list_rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(5 review)</span>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= round($listing->reviews_avg_rating, 1))
+                                        <i class="fas fa-star"></i>
+                                    @else
+                                        <i class="fal fa-star"></i>
+                                    @endif
+                                @endfor
+                                <span>({{ $listing->reviews_count }} reviews)</span>
                             </p>
                             <a
                                 href="{{ route('listing.show', $listing->slug) }}">{{ truncateText($listing->title) }}</a>

@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                                                                        BREADCRUMB PART START
-                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        BREADCRUMB PART START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
     <div id="breadcrumb_part"
         style="background: url({{ $listing->thumbnail_image }});
     background-size: cover; background-repeat: no-repeat; background-position: center;
@@ -24,13 +24,13 @@
         </div>
     </div>
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                                                                        BREADCRUMB PART END
-                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        BREADCRUMB PART END
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
 
 
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                                                                        LISTING DETAILS START
-                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        LISTING DETAILS START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ===========================-->
     <section id="listing_details">
         <div class="container">
             <div class="row">
@@ -45,13 +45,15 @@
                                 <p class="host_name">Hosted by <a
                                         href="agent_public_profile.html">{{ $listing->user->name }}</a></p>
                                 <p class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <b>4.5</b>
-                                    <span>(12 review)</span>
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= round($listing->reviews_avg_rating, 1))
+                                            <i class="fas fa-star"></i>
+                                        @else
+                                            <i class="fal fa-star"></i>
+                                        @endif
+                                    @endfor
+                                    <b>{{ round($listing->reviews_avg_rating, 1) }}</b>
+                                    <span>({{ count($reviews) }} reviews)</span>
                                 </p>
                                 <ul>
                                     @if ($listing->is_verified)
@@ -62,9 +64,9 @@
                                     @endif
                                     <li><a href="#"><i class="fal fa-heart"></i> Add to Favorite</a></li>
                                     <li><a href="#"><i class="fal fa-eye"></i> {{ $listing->views }}</a></li>
-                                    @if ($isOpen == 'open')
+                                    @if ($isOpen === 'open')
                                         <li><a href="javascript:;"><i class="fal fa-clock"></i> Open</a></li>
-                                    @elseif ($isOpen == 'closed')
+                                    @elseif ($isOpen === 'closed')
                                         <li><a href="javascript:;"><i class="fal fa-clock"></i> Closed</a></li>
                                     @endif
 
@@ -125,99 +127,73 @@
                         @endif
 
                         <div class="wsus__listing_review">
-                            <h4>reviews 04</h4>
-                            <div class="wsus__single_comment">
-                                <div class="wsus__single_comment_img">
-                                    <img src="images/user_large_img.jpg" alt="comment" class="img-fluid w-100">
-                                </div>
-                                <div class="wsus__single_comment_text">
-                                    <h5>sumon ali<span>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                        </span></h5>
-                                    <span>01-Dec-2021</span>
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad maxime placeat
-                                        ducimus.</p>
-                                </div>
-                            </div>
-                            <div class="wsus__single_comment">
-                                <div class="wsus__single_comment_img">
-                                    <img src="images/card_img.jpg" alt="comment" class="img-fluid w-100">
-                                </div>
-                                <div class="wsus__single_comment_text">
-                                    <h5>shimul sign <span>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                        </span></h5>
-                                    <span>21-Nov-2021</span>
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad maxime placeat
-                                        ducimus magni facilis delectus.</p>
-                                </div>
-                            </div>
-                            <div class="wsus__single_comment">
-                                <div class="wsus__single_comment_img">
-                                    <img src="images/user_large_img.jpg" alt="comment" class="img-fluid w-100">
-                                </div>
-                                <div class="wsus__single_comment_text">
-                                    <h5>sumon ali<span>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                        </span></h5>
-                                    <span>01-Dec-2021</span>
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad maxime placeat
-                                        ducimus.</p>
-                                </div>
-                            </div>
-                            <div class="wsus__single_comment">
-                                <div class="wsus__single_comment_img">
-                                    <img src="images/card_img.jpg" alt="comment" class="img-fluid w-100">
-                                </div>
-                                <div class="wsus__single_comment_text">
-                                    <h5>shimul sign <span>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                        </span></h5>
-                                    <span>21-Nov-2021</span>
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad maxime placeat
-                                        ducimus magni facilis delectus.</p>
-                                </div>
-                            </div>
-                            <form class="input_comment">
-                                <h5>add a review</h5>
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <div class="wsus__select_rating">
-                                            <i class="fas fa-star"></i>
-                                            <select class="select_2" name="state">
-                                                <option value="">select rating</option>
-                                                <option value=""> 1 </option>
-                                                <option value=""> 2 </option>
-                                                <option value=""> 3 </option>
-                                                <option value=""> 4 </option>
-                                                <option value=""> 5 </option>
-                                            </select>
-                                        </div>
+                            <h4> <span class="">{{ count($reviews) }}</span> reviews </h4>
+                            @foreach ($reviews as $review)
+                                <div class="wsus__single_comment">
+                                    <div class="wsus__single_comment_img">
+                                        <img src="{{ asset($review->user->avatar) }}" alt="comment"
+                                            class="img-fluid w-100">
                                     </div>
-                                    <div class="col-xl-12">
-                                        <div class="blog_single_input">
-                                            <textarea cols="3" rows="5" placeholder="Comment"></textarea>
-                                            <button type="submit" class="read_btn">submit review</button>
-                                        </div>
+                                    <div class="wsus__single_comment_text">
+                                        <h5>{{ $review->user->name }}<span>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $review->rating)
+                                                        <i class="fas fa-star"></i>
+                                                    @else
+                                                        <i class="fal fa-star"></i>
+                                                    @endif
+                                                @endfor
+
+                                            </span></h5>
+                                        <span>{{ \Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</span>
+                                        <p>{{ $review->review }}</p>
                                     </div>
                                 </div>
-                            </form>
+                            @endforeach
+                            <div>
+                                <div id="pagination">
+                                    @if ($reviews->hasPages())
+                                        {{ $reviews->links() }}
+                                    @endif
+                                </div>
+
+                            </div>
+                            @auth
+                                <form action="{{ route('listing-review.store') }}" method="POST" class="input_comment">
+                                    @csrf
+
+                                    <h5>add a review</h5>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="wsus__select_rating">
+                                                <i class="fas fa-star"></i>
+                                                <select class="select_2" name="rating">
+                                                    <option value="">select rating</option>
+                                                    <option value="1"> 1 </option>
+                                                    <option value="2"> 2 </option>
+                                                    <option value="3"> 3 </option>
+                                                    <option value="4"> 4 </option>
+                                                    <option value="5"> 5 </option>
+                                                </select>
+                                                <input type="hidden" name="listing_id" value="{{ $listing->id }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <div class="blog_single_input">
+                                                <textarea cols="3" rows="5" placeholder="Comment" name="review"></textarea>
+                                                <button type="submit" class="read_btn">submit review</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            @endauth
+                            @guest
+                                <div class="alert alert-warning">
+                                    <h5>add a review</h5>
+                                    <p>Please <a href="{{ route('login') }}">login</a> to add a review</p>
+                                </div>
+                            @endguest
+
                         </div>
                     </div>
                 </div>

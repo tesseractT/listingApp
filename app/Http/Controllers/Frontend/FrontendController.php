@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Events\CreateOrder;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use App\Models\Hero;
-use App\Models\Category;
-use App\Models\Listing;
-use App\Models\ListingSchedule;
-use App\Models\Package;
 use Session;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Hero;
+use App\Models\Review;
+use App\Models\Listing;
+use App\Models\Package;
+use App\Models\Category;
 use App\Models\Location;
+use Illuminate\View\View;
+use App\Events\CreateOrder;
+use Illuminate\Http\Request;
+use App\Models\ListingSchedule;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 
 class FrontendController extends Controller
 {
@@ -25,10 +27,25 @@ class FrontendController extends Controller
         $featuredCategories = Category::withCount(['listings' => function ($query) {
             $query->where('is_approved', 1);
         }])->where(['show_at_home' => 1, 'status' => 1])->take(6)->get();
+
+        // Featured Locations
         $featuredLocations = Location::with(['listings' => function ($query) {
-            $query->where(['is_approved' => 1, 'status' => 1])->orderBy('id', 'desc')->limit(3);
+            $query->withAvg(['reviews' => function ($query) {
+                $query->where('is_approved', 1);
+            }], 'rating')
+                ->withCount(['reviews' => function ($query) {
+                    $query->where('is_approved', 1);
+                }])
+                ->where(['is_approved' => 1, 'status' => 1])->orderBy('id', 'desc')->limit(3);
         }])->where(['show_at_home' =>  1, 'status' => 1])->get();
-        $featuredListings = Listing::where(['is_approved' => 1, 'status' => 1, 'is_featured' => 1])->orderBy('id', 'desc')->limit(10)->get();
+
+        // Featured Listings
+        $featuredListings = Listing::withAvg(['reviews' => function ($query) {
+            $query->where('is_approved', 1);
+        }], 'rating')
+            ->withCount(['reviews' => function ($query) {
+                $query->where('is_approved', 1);
+            }])->where(['is_approved' => 1, 'status' => 1, 'is_featured' => 1])->orderBy('id', 'desc')->limit(10)->get();
         return view(
             'frontend.home.index',
             compact(
@@ -44,7 +61,14 @@ class FrontendController extends Controller
 
     function listings(Request $request): View
     {
-        $listings = Listing::with(['location', 'category'])->where(['status' => 1, 'is_approved' => 1]);
+        $listings = Listing::withAvg(['reviews' => function ($query) {
+            $query->where('is_approved', 1);
+        }], 'rating')
+            ->withCount(['reviews' => function ($query) {
+                $query->where('is_approved', 1);
+            }])
+            ->with(['location', 'category'])->where(['status' => 1, 'is_approved' => 1]);
+
         $listings->when($request->has('category'), function ($query) use ($request) {
             return $query->whereHas('category', function ($query) use ($request) {
                 $query->where('slug', $request->category);
@@ -62,13 +86,19 @@ class FrontendController extends Controller
 
     function showListing(string $slug): View
     {
-        $listing = Listing::with(['location', 'category'])->where(['status' => 1, 'is_verified' => 1])->where('slug', $slug)->first();
+        $listing = Listing::with(['location', 'category'])->withAvg(['reviews' => function ($query) {
+            $query->where('is_approved', 1);
+        }], 'rating')
+            ->where(['status' => 1, 'is_verified' => 1])
+            ->where('slug', $slug)->first();
+        // dd($listing);
         $listing->increment('views');
 
         $isOpen = $this->listingScheduleStatus($listing);
+        $reviews = Review::with('user')->where(['listing_id' => $listing->id, 'is_approved' => 1])->paginate(10);
 
         $similarListings = Listing::with(['location', 'category'])->where(['status' => 1, 'is_verified' => 1])->where('category_id', $listing->category_id)->where('id', '!=', $listing->id)->latest()->limit(3)->get();
-        return view('frontend.pages.listing-view', compact('listing', 'similarListings', 'isOpen'));
+        return view('frontend.pages.listing-view', compact('listing', 'similarListings', 'isOpen', 'reviews'));
     }
 
     function listingScheduleStatus(Listing $listing): ?string
@@ -84,6 +114,7 @@ class FrontendController extends Controller
                 $isOpen = 'closed';
             }
         }
+        // dd(strtolower(date('l')));
         return $isOpen;
     }
 
@@ -115,5 +146,28 @@ class FrontendController extends Controller
             return redirect()->route('user.dashboard')->with('success', 'Successfully Subscribed to Free Package');
         }
         return view('frontend.pages.checkout', compact('package'));
+    }
+
+    function submitReview(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'rating' => ['required', 'integer', 'between:1,5'],
+            'review' => ['required', 'string', 'max:500'],
+            'listing_id' => ['required', 'integer', 'exists:listings,id']
+        ]);
+
+        $prevReview = Review::where(['listing_id' => $request->listing_id, 'user_id' => auth()->user()->id])->exists();
+        if ($prevReview) {
+            throw ValidationException::withMessages(['review' => 'You have already submitted a review for this listing']);
+        }
+
+        $review = new Review();
+        $review->user_id = auth()->user()->id;
+        $review->listing_id = $request->listing_id;
+        $review->rating = $request->rating;
+        $review->review = $request->review;
+        $review->save();
+
+        return back()->with('success', 'Review Submitted Successfully');
     }
 }

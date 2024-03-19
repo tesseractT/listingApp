@@ -214,6 +214,9 @@
                     <li class="{{ setSidebarActive(['admin.pending-listing.*', 'admin.listing-.*']) }}"><a
                             class="nav-link" href="{{ route('admin.pending-listing.index') }}">Pending Listings</a>
                     </li>
+                    <li class="{{ setSidebarActive(['admin.listing-review.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.listing-review.index') }}">Listing Reviews</a>
+                    </li>
                 </ul>
             </li>
             <li class="dropdown {{ setSidebarActive(['admin.package.index']) }}">

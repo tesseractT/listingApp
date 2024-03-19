@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                                BREADCRUMB PART START
-                                                                                            ===========================-->
+                                                                                                            BREADCRUMB PART START
+                                                                                                        ===========================-->
     <div id="breadcrumb_part">
         <div class="bread_overlay">
             <div class="container">
@@ -21,13 +21,13 @@
         </div>
     </div>
     <!--==========================
-                                                                                                BREADCRUMB PART END
-                                                                                            ===========================-->
+                                                                                                            BREADCRUMB PART END
+                                                                                                        ===========================-->
 
 
     <!--==========================
-                                                                                                LISTING PAGE START
-                                                                                            ===========================-->
+                                                                                                            LISTING PAGE START
+                                                                                                        ===========================-->
     <section id="listing_grid" class="grid_view">
         <div class="container">
             <div class="row">
@@ -138,12 +138,14 @@
                                             class="fas fa-info"></i></a>
                                     <div class="wsus__featured_single_text">
                                         <p class="list_rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <span>(5 review)</span>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @if ($i <= round($listing->reviews_avg_rating, 1))
+                                                    <i class="fas fa-star"></i>
+                                                @else
+                                                    <i class="fal fa-star"></i>
+                                                @endif
+                                            @endfor
+                                            <span>({{ $listing->reviews_count }} reviews)</span>
                                         </p>
                                         <a
                                             href="{{ route('listing.show', $listing->slug) }}">{{ truncateText($listing->title) }}</a>
@@ -155,24 +157,9 @@
 
                         <div class="col-12">
                             <div id="pagination">
-                                <nav aria-label="">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i
-                                                    class="fas fa-chevron-left"></i></a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">01</a></li>
-                                        <li class="page-item" aria-current="page">
-                                            <a class="page-link" href="#">02</a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="#">03</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">04</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">05</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                @if ($listings->hasPages())
+                                    {{ $listings->links() }}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -183,6 +170,6 @@
 
 
     <!--==========================
-                                                                                                LISTING PAGE START
-                                                                                            ===========================-->
+                                                                                                            LISTING PAGE START
+                                                                                                        ===========================-->
 @endsection

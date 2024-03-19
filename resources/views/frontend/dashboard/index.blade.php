@@ -41,58 +41,65 @@
                                 <div class="col-xl-12">
                                     <div class="active_package">
                                         <h4>Active Package</h4>
-                                        <div class="table-responsive">
-                                            <table class="table dashboard_table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="active_left">Package name</td>
-                                                        <td class="package_right">{{ $subscription->package->name }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="active_left">Price</td>
-                                                        <td class="package_right">
-                                                            {{ currencyPosition($subscription->package->price) }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="active_left">Purchase Date</td>
-                                                        <td class="package_right">
-                                                            {{ date('d F, Y', strtotime($subscription->purchase_date)) }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="active_left">Expiry Date</td>
-                                                        <td class="package_right">
-                                                            {{ date('d F, Y', strtotime($subscription->expiry_date)) }}</td>
-                                                    </tr>
+                                        @if ($subscription === null)
+                                            <p class="alert alert-warning">No active package found</p>
+                                        @else
+                                            <div class="table-responsive">
+                                                <table class="table dashboard_table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="active_left">Package name</td>
+                                                            <td class="package_right">{{ $subscription->package->name }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="active_left">Price</td>
+                                                            <td class="package_right">
+                                                                {{ currencyPosition($subscription->package->price) }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="active_left">Purchase Date</td>
+                                                            <td class="package_right">
+                                                                {{ date('d F, Y', strtotime($subscription->purchase_date)) }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="active_left">Expiry Date</td>
+                                                            <td class="package_right">
+                                                                {{ date('d F, Y', strtotime($subscription->expiry_date)) }}
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="active_left">Maximum Listing </td>
-                                                        <td class="package_right">
-                                                            {{ $subscription->package->num_of_listings }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="active_left">Maximum Aminities</td>
-                                                        <td class="package_right">
-                                                            {{ $subscription->package->num_of_amenities }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="active_left">Maximum Photo</td>
-                                                        <td class="package_right">
-                                                            {{ $subscription->package->num_of_photos }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="active_left">Maximum Video</td>
-                                                        <td class="package_right">
-                                                            {{ $subscription->package->num_of_videos }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="active_left">Featured Listing Available</td>
-                                                        <td class="package_right">
-                                                            {{ $subscription->package->num_of_featured_listing }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                        <tr>
+                                                            <td class="active_left">Maximum Listing </td>
+                                                            <td class="package_right">
+                                                                {{ $subscription->package->num_of_listings }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="active_left">Maximum Aminities</td>
+                                                            <td class="package_right">
+                                                                {{ $subscription->package->num_of_amenities }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="active_left">Maximum Photo</td>
+                                                            <td class="package_right">
+                                                                {{ $subscription->package->num_of_photos }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="active_left">Maximum Video</td>
+                                                            <td class="package_right">
+                                                                {{ $subscription->package->num_of_videos }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="active_left">Featured Listing Available</td>
+                                                            <td class="package_right">
+                                                                {{ $subscription->package->num_of_featured_listing }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
