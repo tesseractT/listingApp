@@ -27,5 +27,24 @@ class AppServiceProvider extends ServiceProvider
 
         //** Set default pagination design */
         Paginator::useBootstrap();
+
+        //** Set pusher config  */
+
+        $keys = [
+            'pusher_app_id',
+            'pusher_app_key',
+            'pusher_secret_key',
+            'pusher_cluster',
+        ];
+        $pusherConf = Setting::whereIn('key', $keys)->pluck('value', 'key')->toArray();
+
+        // dd($pusherConf);
+
+        config([
+            'broadcasting.connections.pusher.key' => $pusherConf['pusher_app_key'],
+            'broadcasting.connections.pusher.secret' => $pusherConf['pusher_secret_key'],
+            'broadcasting.connections.pusher.app_id' => $pusherConf['pusher_app_id'],
+            'broadcasting.connections.pusher.options.cluster' => $pusherConf['pusher_cluster'],
+        ]);
     }
 }

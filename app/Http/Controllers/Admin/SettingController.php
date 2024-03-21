@@ -43,4 +43,28 @@ class SettingController extends Controller
 
         return back()->with('success', 'General settings updated successfully');
     }
+
+    function updatePusherSetting(Request $request): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'pusher_app_id' => ['required', 'string'],
+            'pusher_app_key' => ['required', 'string'],
+            'pusher_secret_key' => ['required', 'string'],
+            'pusher_cluster' => ['required', 'string'],
+        ]);
+
+        foreach ($validatedData as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+
+        $settingsService = app()->make(SettingsService::class);
+        $settingsService->clearCachedSettings();
+
+        Artisan::call('config:cache');
+
+        return back()->with('success', 'Pusher settings updated successfully');
+    }
 }

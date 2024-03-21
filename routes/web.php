@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\AgentListingController;
 use App\Http\Controllers\Frontend\AgentListingImageGalleryController;
 use App\Http\Controllers\Frontend\AgentListingVideoGalleryController;
 use App\Http\Controllers\Frontend\AgentListingScheduleController;
+use App\Http\Controllers\Frontend\ChatController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Frontend\OrderController;
 
@@ -49,6 +50,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], func
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile-update', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/password-update', [ProfileController::class, 'updatePassword'])->name('profile-password.update');
+
+    /** Messages */
+    Route::get('/messages', [ChatController::class, 'index'])->name('messages');
+    Route::post('/send-message', [ChatController::class, 'sendMessage'])->name('send-message');
 
 
     /** Agent Listing Routes  */

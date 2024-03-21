@@ -69,6 +69,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Chat
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat query()
+ */
+	class Chat extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Claim
  *
  * @property int $id

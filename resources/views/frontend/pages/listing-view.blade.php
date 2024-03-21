@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            BREADCRUMB PART START
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                BREADCRUMB PART START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ===========================-->
     <div id="breadcrumb_part"
         style="background: url({{ $listing->thumbnail_image }});
     background-size: cover; background-repeat: no-repeat; background-position: center;
@@ -24,13 +24,11 @@
         </div>
     </div>
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            BREADCRUMB PART END
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ===========================-->
-
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                BREADCRUMB PART END
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ===========================-->
     <!--==========================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            LISTING DETAILS START
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ===========================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                LISTING DETAILS START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ===========================-->
     <section id="listing_details">
         <div class="container">
             <div class="row">
@@ -255,14 +253,13 @@
                     </div>
                     <div class="col-12">
                         <div class="listing_det_side_contact">
-                            <h5>quick contact</h5>
-                            <form type="text" placeholder="Name*">
-                                <input type="email" placeholder="Email*">
-                                <input type="text" placeholder="Phone*">
-                                <input type="text" placeholder="Subject*">
-                                <textarea cols="3" rows="5" placeholder="Message*"></textarea>
-                                <button type="submit" class="read_btn">send</button>
-                            </form>
+                            <h5>Send a Message</h5>
+                            <button type="submit" class="read_btn" data-bs-toggle="modal"
+                                data-bs-target="#messageModal">Message</button>
+                            <div class="alert alert-success mt-4 text-center d-none message-alert">
+                                <a href="{{ route('user.messages') }}">Click here</a> to go to inbox
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-12">
@@ -328,7 +325,64 @@
     </div>
 </section>
 <!--=============Claim MODAL POPUP==============-->
-<!--==========================
-                                                                                                                                                                                                                    LISTING DETAILS END
-                                                                                                                                                                                                                ===========================-->
+
+<!--=============Message MODAL POPUP==============-->
+<section id="wsus__map_popup">
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="btn-close popup_close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="far fa-times"></i></button>
+                <div class="modal-body modal-listing-content listing_det_side_contact" style="box-shadow: none">
+                    <h5 class="mb-4">Message</h5>
+                    <form action="" method="POST" class="message-form">
+                        @csrf
+                        <input type="hidden" name="receiver_id" value="{{ $listing->user_id }}">
+                        <input type="hidden" name="listing_id" value="{{ $listing->id }}">
+                        <textarea rows="5" placeholder="Message*" name="message"></textarea>
+                        <button type="submit" class="">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--=============Message MODAL POPUP==============-->
 @endsection
+@push('scripts')
+<script>
+    $('.message-form').on('submit', function(e) {
+        e.preventDefault();
+        let formData = $(this).serialize();
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('user.send-message') }}',
+            data: formData,
+            beforeSend: function() {
+                $('.message-form button').html(`  <span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span>
+   Sending...`);
+                $('.message-form button').prop('disabled', true)
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    toastr.success(response.message);
+
+                }
+            },
+            error: function(xhr, status, error) {
+                if (xhr.responseJSON.message) {
+                    toastr.error(xhr.responseJSON.message);
+                }
+            },
+            complete: function() {
+                $('.message-form button').html('Send');
+                $('.message-form button').prop('disabled', false)
+                $('.message-form').trigger('reset');
+                $('#messageModal').modal('hide');
+                $('.message-alert').removeClass('d-none');
+            }
+        })
+    })
+</script>
+@endpush
