@@ -235,6 +235,8 @@
             </li>
             <li><a class="nav-link" href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>
                         Orders</span></a></li>
+            <li><a class="nav-link" href="{{ route('admin.messages.index') }}"><i class="far fa-square"></i> <span>
+                        Messages</span></a></li>
             <li><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="far fa-square"></i> <span>
                         Settings</span></a></li>
         </ul>

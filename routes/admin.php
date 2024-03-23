@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ClaimController;
 use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\ListingImageGalleryController;
@@ -85,6 +86,13 @@ Route::group([
 
     /** Order Routes  */
     Route::resource('/orders', OrderController::class);
+
+    /** Messages Routes */
+    Route::get('/messages', [ChatController::class, 'index'])->name('messages.index');
+    Route::get('/get-messages', [ChatController::class, 'getMessages'])->name('get-messages');
+    Route::post('/send-message', [ChatController::class, 'sendMessage'])->name('send-message');
+
+
 
 
     /** Settings Routes  */

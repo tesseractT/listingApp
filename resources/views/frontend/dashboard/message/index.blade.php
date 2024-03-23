@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--=============================
-        DASHBOARD START
-      ==============================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    DASHBOARD START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ==============================-->
     <section id="dashboard">
         <div class="container">
             <div class="row">
@@ -17,117 +17,31 @@
                                     <div class="tf__message_list">
                                         <div class="nav flex-column nav-pills tf__massager_option" id="v-pills-tab"
                                             role="tablist" aria-orientation="vertical">
-                                            <div class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
-                                                data-bs-target="#v-pills-home" role="tab" aria-controls="v-pills-home"
-                                                aria-selected="true">
-
-                                                <div class="tf__single_massage d-flex">
-                                                    <div class="tf__single_massage_img">
-                                                        <img src="images/massage-1.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="tf__single_massage_text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>Lorem ipsum dolor si..</p>
-                                                        <span class="tf__massage_time">30 min</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="nav-link" id="v-pills-messages-tab1" data-bs-toggle="pill"
-                                                data-bs-target="#v-pills-messages1" role="tab"
-                                                aria-controls="v-pills-messages1" aria-selected="false">
-                                                <div class="tf__single_massage d-flex">
-                                                    <div class="tf__single_massage_img">
-                                                        <img src="images/massage-2.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="tf__single_massage_text">
-                                                        <h4>Sohan Islam</h4>
-                                                        <p>Lorem ipsum dolor si..</p>
-                                                        <span class="tf__massage_time">20 min</span>
+                                            @foreach ($receivers as $receiver)
+                                                <div class="nav-link profile-card"
+                                                    data-listing-id="{{ $receiver->listingProfile->id }}"
+                                                    data-receiver-id="{{ $receiver->receiverProfile->id }}"
+                                                    id="v-pills-home-tab" data-bs-toggle="pill"
+                                                    data-bs-target="#v-pills-home" role="tab"
+                                                    aria-controls="v-pills-home" aria-selected="true">
+                                                    <div class="tf__single_massage d-flex">
+                                                        <div class="tf__single_massage_img">
+                                                            <img src="{{ asset($receiver->listingProfile->image) }}"
+                                                                alt="person" class="img-fluid w-100 profile_img">
+                                                            <span class="user-active"></span>
+                                                        </div>
+                                                        <div class="tf__single_massage_text">
+                                                            <h4 class="profile_name">
+                                                                {{ truncateText($receiver->listingProfile->title, 15) }}
+                                                            </h4>
+                                                            <p><i class="fas fa-crown">
+                                                                </i> {{ $receiver->receiverProfile->name }}
+                                                            </p>
+                                                            <span class="tf__massage_time">30 min</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="nav-link" id="v-pills-messages-tab2" data-bs-toggle="pill"
-                                                data-bs-target="#v-pills-messages2" role="tab"
-                                                aria-controls="v-pills-messages2" aria-selected="false">
-                                                <div class="tf__single_massage d-flex">
-                                                    <div class="tf__single_massage_img">
-                                                        <img src="images/massage-3.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="tf__single_massage_text">
-                                                        <h4>Asad Islam</h4>
-                                                        <p>Lorem ipsum dolor si..</p>
-                                                        <span class="tf__massage_time">10 min</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="nav-link" id="v-pills-messages-tab3" data-bs-toggle="pill"
-                                                data-bs-target="#v-pills-messages3" role="tab"
-                                                aria-controls="v-pills-messages3" aria-selected="false">
-                                                <div class="tf__single_massage d-flex">
-                                                    <div class="tf__single_massage_img">
-                                                        <img src="images/massage-4.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="tf__single_massage_text">
-                                                        <h4>Jannatul Jeo </h4>
-                                                        <p>Lorem ipsum dolor si..</p>
-                                                        <span class="tf__massage_time">30 min</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="nav-link" id="v-pills-messages-tab4" data-bs-toggle="pill"
-                                                data-bs-target="#v-pills-messages4" role="tab"
-                                                aria-controls="v-pills-messages4" aria-selected="false">
-                                                <div class="tf__single_massage d-flex">
-                                                    <div class="tf__single_massage_img">
-                                                        <img src="images/massage-5.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="tf__single_massage_text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>Lorem ipsum dolor si..</p>
-                                                        <span class="tf__massage_time">27 min</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="nav-link" id="v-pills-messages-tab5" data-bs-toggle="pill"
-                                                data-bs-target="#v-pills-messages5" role="tab"
-                                                aria-controls="v-pills-messages5" aria-selected="false">
-                                                <div class="tf__single_massage d-flex">
-                                                    <div class="tf__single_massage_img">
-                                                        <img src="images/massage-6.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="tf__single_massage_text">
-                                                        <h4>Happy Heya</h4>
-                                                        <p>Lorem ipsum dolor si..</p>
-                                                        <span class="tf__massage_time">18 min</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="nav-link" id="v-pills-messages-tab6" data-bs-toggle="pill"
-                                                data-bs-target="#v-pills-messages6" role="tab"
-                                                aria-controls="v-pills-messages6" aria-selected="false">
-                                                <div class="tf__single_massage d-flex">
-                                                    <div class="tf__single_massage_img">
-                                                        <img src="images/massage-7.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="tf__single_massage_text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>Lorem ipsum dolor si..</p>
-                                                        <span class="tf__massage_time">9 min</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -136,619 +50,38 @@
 
                                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                                             aria-labelledby="v-pills-home-tab" tabindex="0">
-                                            <div class="tf___single_chat">
+                                            <div class="tf___single_chat d-none ">
+
                                                 <div class="tf__single_chat_top">
                                                     <div class="img">
-                                                        <img src="images/massage-4.png" alt="person"
+                                                        <img id="chat_img" src="images/massage-4.png" alt="person"
                                                             class="img-fluid w-100">
                                                     </div>
                                                     <div class="text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>active</p>
-                                                        <a href="#">Clear Chat</a>
+                                                        <h4 id="chat_name">Charlene Reed</h4>
+                                                        {{-- <p>active</p> --}}
                                                     </div>
                                                 </div>
 
-                                                <div class="tf__single_chat_body">
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>eum errem is any one aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Mundi admodum menandri, eum errem is any one aperiri at. Ut
-                                                                quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
+                                                <div class="tf__single_chat_body main_chat_inbox">
+
+
                                                 </div>
-                                                <form class="tf__single_chat_bottom">
-                                                    <input type="text" placeholder="Type a message...">
+                                                <form class="tf__single_chat_bottom message-form">
+                                                    @csrf
+                                                    <input type="hidden" id="receiver_id" name="receiver_id"
+                                                        value="">
+                                                    <input type="hidden" id="listing_id" name="listing_id" value="">
+
+                                                    <input id="message" type="text" placeholder="Type a message..."
+                                                        name="message">
                                                     <button class="tf__massage_btn"><i
                                                             class="fas fa-paper-plane"></i></button>
                                                 </form>
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane fade" id="v-pills-messages1" role="tabpanel"
-                                            aria-labelledby="v-pills-messages-tab1" tabindex="0">
-                                            <div class="tf___single_chat">
-                                                <div class="tf__single_chat_top">
-                                                    <div class="img">
-                                                        <img src="images/massage-4.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>active</p>
-                                                        <a href="#">Clear Chat</a>
-                                                    </div>
-                                                </div>
 
-                                                <div class="tf__single_chat_body">
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>eum errem is any one aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Mundi admodum menandri, eum errem is any one aperiri at. Ut
-                                                                quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <form class="tf__single_chat_bottom">
-                                                    <input type="text" placeholder="Type a message...">
-                                                    <button class="tf__massage_btn"><i
-                                                            class="fas fa-paper-plane"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="v-pills-messages2" role="tabpanel"
-                                            aria-labelledby="v-pills-messages-tab2" tabindex="0">
-                                            <div class="tf___single_chat">
-                                                <div class="tf__single_chat_top">
-                                                    <div class="img">
-                                                        <img src="images/massage-4.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>active</p>
-                                                        <a href="#">Clear Chat</a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="tf__single_chat_body">
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>eum errem is any one aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Mundi admodum menandri, eum errem is any one aperiri at. Ut
-                                                                quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <form class="tf__single_chat_bottom">
-                                                    <input type="text" placeholder="Type a message...">
-                                                    <button class="tf__massage_btn"><i
-                                                            class="fas fa-paper-plane"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="v-pills-messages3" role="tabpanel"
-                                            aria-labelledby="v-pills-messages-tab3" tabindex="0">
-                                            <div class="tf___single_chat">
-                                                <div class="tf__single_chat_top">
-                                                    <div class="img">
-                                                        <img src="images/massage-4.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>active</p>
-                                                        <a href="#">Clear Chat</a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="tf__single_chat_body">
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>eum errem is any one aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Mundi admodum menandri, eum errem is any one aperiri at. Ut
-                                                                quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <form class="tf__single_chat_bottom">
-                                                    <input type="text" placeholder="Type a message...">
-                                                    <button class="tf__massage_btn"><i
-                                                            class="fas fa-paper-plane"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="v-pills-messages4" role="tabpanel"
-                                            aria-labelledby="v-pills-messages-tab4" tabindex="0">
-                                            <div class="tf___single_chat">
-                                                <div class="tf__single_chat_top">
-                                                    <div class="img">
-                                                        <img src="images/massage-4.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>active</p>
-                                                        <a href="#">Clear Chat</a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="tf__single_chat_body">
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>eum errem is any one aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Mundi admodum menandri, eum errem is any one aperiri at. Ut
-                                                                quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <form class="tf__single_chat_bottom">
-                                                    <input type="text" placeholder="Type a message...">
-                                                    <button class="tf__massage_btn"><i
-                                                            class="fas fa-paper-plane"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="v-pills-messages5" role="tabpanel"
-                                            aria-labelledby="v-pills-messages-tab5" tabindex="0">
-                                            <div class="tf___single_chat">
-                                                <div class="tf__single_chat_top">
-                                                    <div class="img">
-                                                        <img src="images/massage-4.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>active</p>
-                                                        <a href="#">Clear Chat</a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="tf__single_chat_body">
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>eum errem is any one aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Mundi admodum menandri, eum errem is any one aperiri at. Ut
-                                                                quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <form class="tf__single_chat_bottom">
-                                                    <input type="text" placeholder="Type a message...">
-                                                    <button class="tf__massage_btn"><i
-                                                            class="fas fa-paper-plane"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="v-pills-messages6" role="tabpanel"
-                                            aria-labelledby="v-pills-messages-tab6" tabindex="0">
-                                            <div class="tf___single_chat">
-                                                <div class="tf__single_chat_top">
-                                                    <div class="img">
-                                                        <img src="images/massage-4.png" alt="person"
-                                                            class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="text">
-                                                        <h4>Charlene Reed</h4>
-                                                        <p>active</p>
-                                                        <a href="#">Clear Chat</a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="tf__single_chat_body">
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>eum errem is any one aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Mundi admodum menandri, eum errem is any one aperiri at. Ut
-                                                                quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating">
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-4.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="tf__chating_text">
-                                                            <p>Cum id mundi admodum menandri, eum errem is any one
-                                                                aperiri at. Ut quas facilis qui</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf__chating tf_chat_right">
-                                                        <div class="tf__chating_text">
-                                                            <p>Please check your mail and come on meeting</p>
-                                                            <span>15 Jun, 2023, 05:26 AM</span>
-                                                        </div>
-                                                        <div class="tf__chating_img">
-                                                            <img src="images/massage-8.png" alt="person"
-                                                                class="img-fluid w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <form class="tf__single_chat_bottom">
-                                                    <input type="text" placeholder="Type a message...">
-                                                    <button class="tf__massage_btn"><i
-                                                            class="fas fa-paper-plane"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
 
                                     </div>
                                 </div>
@@ -760,6 +93,167 @@
         </div>
     </section>
     <!--=============================
-        DASHBOARD START
-      ==============================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    DASHBOARD START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ==============================-->
 @endsection
+@push('scripts')
+    <script>
+        const mainChatInbox = $('.main_chat_inbox');
+        const loader = ` <div class=" d-flex justify-content-center align-items-center"
+                                                        style="height: 500px">
+                                                        <div class="spinner-border" role="status">
+                                                            <span class="visually-hidden">Loading...</span>
+                                                        </div>
+                                                    </div>`;
+
+        function updateChatProfile(data) {
+            let profileImage = data.find('.profile_img').attr('src');
+            let profileName = data.find('.profile_name').text();
+
+            $('#chat_img').attr('src', profileImage);
+            $('#chat_name').text(profileName);
+
+            // set listing id and receiver id in messaqge form
+            let listingId = data.data('listing-id');
+            let receiverId = data.data('receiver-id');
+            $('#listing_id').val(listingId);
+            $('#receiver_id').val(receiverId);
+        }
+
+        function scrollToBottom() {
+            mainChatInbox.scrollTop(mainChatInbox.prop("scrollHeight"));
+        }
+
+        function formatDateTime(dateTimeString) {
+            const options = {
+                year: 'numeric',
+                month: 'short',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+            }
+
+            const formattedDateTime = new Intl.DateTimeFormat('en-US', options).format(new Date(
+                dateTimeString));
+
+            return formattedDateTime;
+        }
+
+
+
+        $(document).ready(function() {
+            const baseUri = "{{ asset('/') }}"
+            $('.profile-card').on('click', function() {
+
+                //make chat box visible
+                $('.tf___single_chat').removeClass('d-none');
+                //update chat profile
+                updateChatProfile($(this));
+
+                //clear chat inbox
+                mainChatInbox.html("");
+
+                //fetch chat data
+                let listingId = $(this).data('listing-id');
+                let receiverId = $(this).data('receiver-id');
+                $.ajax({
+                    method: 'GET',
+                    url: '{{ route('user.get-messages') }}',
+                    data: {
+                        'listing_id': listingId,
+                        'receiver_id': receiverId
+                    },
+                    beforeSend: function() {
+                        mainChatInbox.html(loader);
+                    },
+                    success: function(response) {
+                        mainChatInbox.html("");
+                        $.each(response, function(index, value) {
+                            const imgUrl = baseUri.replace(/\/$/, '') + value
+                                .sender_profile.avatar;
+
+                            if (value.sender_id == USER.id) {
+                                var message = `<div class="tf__chating tf_chat_right">
+                                                        <div class="tf__chating_text">
+                                                            <p>${value.message}</p>
+                                                            <span>${formatDateTime(value.created_at)}</span>
+                                                        </div>
+                                                        <div class="tf__single_massage_img">
+                                                            <img src="${imgUrl}" alt="person"
+                                                                class="img-fluid w-100">
+                                                        </div>
+                                                    </div>`
+                            } else {
+                                var message = `  <div class="tf__chating">
+                                                        <div class="tf__chating_img">
+                                                            <img src="${imgUrl}" alt="person"
+                                                                class="img-fluid w-100 rounded-circle">
+                                                        </div>
+                                                        <div class="tf__chating_text">
+                                                            <p>${value.message}</p>
+                                                            <span>${formatDateTime(value.created_at)}</span>
+                                                        </div>
+                                                    </div>`;
+                            }
+                            mainChatInbox.append(message);
+                        });
+                        scrollToBottom();
+                    },
+                    error: function(xhr, status, error) {},
+
+                });
+            });
+
+            //send message
+            $('.message-form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+                let messageData = $('#message').val();
+                var formSubmitting = false;
+
+
+                if (formSubmitting || !messageData) {
+                    return;
+                }
+
+                //set message in chat inbox
+                let message = `<div class="tf__chating tf_chat_right">
+                                                        <div class="tf__chating_text">
+                                                            <p>${messageData}</p>
+                                                           <span class="sending"> Sending..</span>
+                                                        </div>
+                                                        <div class="tf__single_massage_img">
+                                                            <img src="${USER.avatar}" alt="person"
+                                                                class="img-fluid w-100">
+                                                        </div>
+                                                    </div>`
+                mainChatInbox.append(message);
+                scrollToBottom();
+
+                //clear message input
+                $('.message-form').trigger('reset');
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route('user.send-message') }}',
+                    data: formData,
+                    beforeSend: function() {
+                        formSubmitting = true;
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            $('.sending').remove();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.responseJSON.message) {
+                            toastr.error(xhr.responseJSON.message);
+                        }
+                    },
+                    complete: function() {
+                        formSubmitting = false;
+                    }
+                })
+            })
+        });
+    </script>
+@endpush

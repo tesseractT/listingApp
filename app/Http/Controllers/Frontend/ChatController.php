@@ -11,7 +11,13 @@ class ChatController extends Controller
 {
     function index(): View
     {
-        return view('frontend.dashboard.message.index');
+        $senderId = auth()->user()->id;
+        $receivers = Chat::with(['receiverProfile', 'listingProfile'])->select(['receiver_id', 'listing_id'])
+            ->where('sender_id', $senderId)
+            ->where('receiver_id', '!=', $senderId)
+            ->groupBy('receiver_id', 'listing_id')
+            ->get();
+        return view('frontend.dashboard.message.index', compact('receivers'));
     }
 
     function sendMessage(Request $request)
@@ -30,5 +36,20 @@ class ChatController extends Controller
         $chat->save();
 
         return response(['status' => 'success', 'message' => 'Message sent successfully.']);
+    }
+
+    function getMessages(Request $request)
+    {
+        $senderId = auth()->user()->id;
+        $receiverId = $request->receiver_id;
+        $listingId = $request->listing_id;
+
+        $messages = Chat::with('senderProfile')->whereIn('receiver_id', [$senderId, $receiverId])
+            ->whereIn('sender_id', [$senderId, $receiverId])
+            ->where('listing_id', $listingId)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        return response($messages);
     }
 }

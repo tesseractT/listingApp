@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], func
     /** Messages */
     Route::get('/messages', [ChatController::class, 'index'])->name('messages');
     Route::post('/send-message', [ChatController::class, 'sendMessage'])->name('send-message');
+    Route::get('/get-messages', [ChatController::class, 'getMessages'])->name('get-messages');
 
 
     /** Agent Listing Routes  */

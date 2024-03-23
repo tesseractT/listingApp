@@ -71,9 +71,28 @@ namespace App\Models{
 /**
  * App\Models\Chat
  *
+ * @property int $id
+ * @property int|null $listing_id
+ * @property int $sender_id
+ * @property int $receiver_id
+ * @property string $message
+ * @property int $seen
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Listing|null $listingProfile
+ * @property-read \App\Models\User|null $receiverProfile
+ * @property-read \App\Models\User|null $senderProfile
  * @method static \Illuminate\Database\Eloquent\Builder|Chat newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Chat newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Chat query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereListingId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereReceiverId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereSeen($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereSenderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereUpdatedAt($value)
  */
 	class Chat extends \Eloquent {}
 }
