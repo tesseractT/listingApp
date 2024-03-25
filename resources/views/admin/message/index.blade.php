@@ -22,18 +22,30 @@
                         <div class="card-body">
                             <ul class="list-unstyled list-unstyled-border">
                                 @foreach ($senders as $sender)
+                                    @php
+                                        $unseenMessage = \App\Models\Chat::where([
+                                            'receiver_id' => auth()->user()->id,
+                                            'sender_id' => $sender->sender_id,
+                                            'listing_id' => $sender->listing_id,
+                                            'seen' => 0,
+                                        ])->exists();
+                                    @endphp
                                     <li class="media profile-card" style="cursor: pointer"
                                         data-sender-id="{{ $sender->senderProfile->id }}"
                                         data-listing-id="{{ $sender->listingProfile->id }}">
-                                        <img alt="image" class="mr-3 rounded-circle" width="50"
-                                            src="{{ asset($sender->senderProfile->avatar) }}">
+                                        <img alt="image"
+                                            class="mr-3 rounded-circle profile_img {{ $unseenMessage ? 'new_message' : '' }}"
+                                            width="50" src="{{ asset($sender->senderProfile->avatar) }}">
                                         <div class="media-body">
                                             <div class="mt-0 mb-1 font-weight-bold profile_name">
                                                 {{ $sender->senderProfile->name }}
                                                 <small class="text-primary">( {{ $sender->listingProfile->title }} )</small>
                                             </div>
-                                            <div class="text-success text-small font-600-bold"><i class="fas fa-circle"></i>
-                                                Online</div>
+                                            <div class="user-status">
+                                                <div class="text-secondory text-small font-600-bold"><i
+                                                        class="fas fa-circle"></i>
+                                                    Offline</div>
+                                            </div>
                                         </div>
                                     </li>
                                 @endforeach
@@ -46,7 +58,7 @@
                         <div class="card-header">
                             <h4 id="chat_name">Chat with Rizal</h4>
                         </div>
-                        <div class="card-body chat-content">
+                        <div class="card-body chat-content" data-inbox-user="" data-inbox-listing="">
                         </div>
                         <div class="card-footer chat-form">
                             <form id="chat-form" class="message-form">
@@ -92,6 +104,9 @@
             let receiverId = data.data('sender-id');
             $('#listing_id').val(listingId);
             $('#receiver_id').val(receiverId);
+
+            mainChatInbox.attr('data-inbox-user', receiverId);
+            mainChatInbox.attr('data-inbox-listing', listingId);
         }
 
         function scrollToBottom() {
@@ -117,6 +132,8 @@
 
             //make chat box visible
             $('.chat-box').removeClass('d-none');
+            $(this).find(".profile_img").removeClass("new_message");
+
             //update chat profile
             updateChatProfile($(this));
 
@@ -170,13 +187,13 @@
 
             //set message in chat inbox
 
-            let message = `<div class="chat-item ${value.sender_id == USER.id ? 'chat-right' : 'chat-left'}" style="">
-                        <img class="chat-profile" src="${USER.avatar}">
-                        <div class="chat-details">
-                            <div class="chat-text">${messageData}</div>
-                            <div class="sending">Sending....</div>
-                        </div>
-                    </div>`;
+            let message = `<div class="chat-item chat-right" style="">
+                    <img class="chat-profile" src="${USER.avatar}">
+                    <div class="chat-details">
+                        <div class="chat-text">${messageData}</div>
+                        <div class="sending">sending...</div>
+                    </div>
+                </div>`;
             mainChatInbox.append(message);
             scrollToBottom();
 

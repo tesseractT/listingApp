@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Chat;
+use App\Events\Message;
 
 class ChatController extends Controller
 {
@@ -15,7 +16,9 @@ class ChatController extends Controller
         $receivers = Chat::with(['receiverProfile', 'listingProfile'])->select(['receiver_id', 'listing_id'])
             ->where('sender_id', $senderId)
             ->where('receiver_id', '!=', $senderId)
+            ->selectRaw('MAX(created_at) as last_message_time')
             ->groupBy('receiver_id', 'listing_id')
+            ->orderBy('last_message_time', 'desc')
             ->get();
         return view('frontend.dashboard.message.index', compact('receivers'));
     }
@@ -35,6 +38,9 @@ class ChatController extends Controller
         $chat->message = $request->message;
         $chat->save();
 
+        // broadaast message
+        broadcast(new Message($chat->message, $chat->listing_id, $chat->receiver_id));
+
         return response(['status' => 'success', 'message' => 'Message sent successfully.']);
     }
 
@@ -49,6 +55,13 @@ class ChatController extends Controller
             ->where('listing_id', $listingId)
             ->orderBy('created_at', 'asc')
             ->get();
+
+        Chat::where([
+            'receiver_id' => $senderId,
+            'sender_id' => $receiverId,
+            'listing_id' => $listingId,
+            'seen' => 0,
+        ])->update(['seen' => 1]);
 
         return response($messages);
     }

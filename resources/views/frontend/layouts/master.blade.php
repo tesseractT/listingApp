@@ -29,15 +29,15 @@
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
     @stack('styles')
     <script>
-        var PUSHER_APP_KEY = '{{ config('settings.pusher_app_key') }}';
-        var PUSHER_APP_CLUSTER = '{{ config('settings.pusher_cluster') }}';
+        var PUSHER_APP_KEY = "{{ config('settings.pusher_app_key') }}";
+        var PUSHER_APP_CLUSTER = "{{ config('settings.pusher_cluster') }}";
         var USER = {
             id: '{{ auth()->user()?->id }}',
             name: '{{ auth()->user()?->name }}',
             avatar: '{{ asset(auth()->user()?->avatar) }}'
         };
     </script>
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js', 'resources/js/frontend.js'])
 </head>
 
 <body>

@@ -5852,12 +5852,27 @@ AGENT PROFILE END
     position: absolute;
     height: 16px;
     width: 16px;
-    background: #11e511;
+    background: #11e511 !important;
     border-radius: 50%;
     bottom: 0;
     right: 1px;
 }
 
+.user-status {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    background: #686f68;
+    border-radius: 50%;
+    bottom: 0;
+    right: 1px;
+}
+
+
 .tf__single_massage_img {
     position: relative;
+}
+
+.new_message {
+    border: 4px solid var(--colorPrimary);
 }

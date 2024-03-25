@@ -41,10 +41,19 @@ class AppServiceProvider extends ServiceProvider
         // dd($pusherConf);
 
         config([
-            'broadcasting.connections.pusher.key' => $pusherConf['pusher_app_key'],
-            'broadcasting.connections.pusher.secret' => $pusherConf['pusher_secret_key'],
-            'broadcasting.connections.pusher.app_id' => $pusherConf['pusher_app_id'],
-            'broadcasting.connections.pusher.options.cluster' => $pusherConf['pusher_cluster'],
+            'broadcasting.connections.pusher.key' => $pusherConf['pusher_app_key']
         ]);
+        config([
+            'broadcasting.connections.pusher.secret' => $pusherConf['pusher_secret_key']
+        ]);
+        config([
+            'broadcasting.connections.pusher.app_id' => $pusherConf['pusher_app_id']
+        ]);
+        config([
+            'broadcasting.connections.pusher.options.cluster' => $pusherConf['pusher_cluster']
+        ]);
+
+
+        // dd(config('broadcasting.connections.pusher'));
     }
 }

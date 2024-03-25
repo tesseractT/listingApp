@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('contents')
     <!--=============================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    DASHBOARD START
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ==============================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                DASHBOARD START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ==============================-->
     <section id="dashboard">
         <div class="container">
             <div class="row">
@@ -18,6 +18,14 @@
                                         <div class="nav flex-column nav-pills tf__massager_option" id="v-pills-tab"
                                             role="tablist" aria-orientation="vertical">
                                             @foreach ($receivers as $receiver)
+                                                @php
+                                                    $unseenMessage = \App\Models\Chat::where([
+                                                        'receiver_id' => auth()->user()->id,
+                                                        'sender_id' => $receiver->receiver_id,
+                                                        'listing_id' => $receiver->listing_id,
+                                                        'seen' => 0,
+                                                    ])->exists();
+                                                @endphp
                                                 <div class="nav-link profile-card"
                                                     data-listing-id="{{ $receiver->listingProfile->id }}"
                                                     data-receiver-id="{{ $receiver->receiverProfile->id }}"
@@ -27,8 +35,9 @@
                                                     <div class="tf__single_massage d-flex">
                                                         <div class="tf__single_massage_img">
                                                             <img src="{{ asset($receiver->listingProfile->image) }}"
-                                                                alt="person" class="img-fluid w-100 profile_img">
-                                                            <span class="user-active"></span>
+                                                                alt="person"
+                                                                class="img-fluid w-100 profile_img {{ $unseenMessage ? 'new_message' : '' }}">
+                                                            <span class="user-status"></span>
                                                         </div>
                                                         <div class="tf__single_massage_text">
                                                             <h4 class="profile_name">
@@ -37,7 +46,7 @@
                                                             <p><i class="fas fa-crown">
                                                                 </i> {{ $receiver->receiverProfile->name }}
                                                             </p>
-                                                            <span class="tf__massage_time">30 min</span>
+                                                            <span class="tf__massage_time"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -63,7 +72,8 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="tf__single_chat_body main_chat_inbox">
+                                                <div class="tf__single_chat_body main_chat_inbox" data-inbox-user=""
+                                                    data-inbox-listing="">
 
 
                                                 </div>
@@ -80,9 +90,6 @@
                                                 </form>
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -93,8 +100,8 @@
         </div>
     </section>
     <!--=============================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    DASHBOARD START
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ==============================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                DASHBOARD START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ==============================-->
 @endsection
 @push('scripts')
     <script>
@@ -118,6 +125,8 @@
             let receiverId = data.data('receiver-id');
             $('#listing_id').val(listingId);
             $('#receiver_id').val(receiverId);
+            mainChatInbox.attr('data-inbox-user', receiverId);
+            mainChatInbox.attr('data-inbox-listing', listingId);
         }
 
         function scrollToBottom() {
@@ -147,6 +156,7 @@
 
                 //make chat box visible
                 $('.tf___single_chat').removeClass('d-none');
+                $(this).find(".profile_img").removeClass("new_message");
                 //update chat profile
                 updateChatProfile($(this));
 

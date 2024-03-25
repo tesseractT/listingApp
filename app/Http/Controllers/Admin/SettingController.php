@@ -47,10 +47,10 @@ class SettingController extends Controller
     function updatePusherSetting(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            'pusher_app_id' => ['required', 'string'],
-            'pusher_app_key' => ['required', 'string'],
-            'pusher_secret_key' => ['required', 'string'],
-            'pusher_cluster' => ['required', 'string'],
+            'pusher_app_id' => ['required'],
+            'pusher_app_key' => ['required'],
+            'pusher_secret_key' => ['required'],
+            'pusher_cluster' => ['required'],
         ]);
 
         foreach ($validatedData as $key => $value) {

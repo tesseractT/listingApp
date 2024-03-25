@@ -7,8 +7,6 @@
 import axios from "axios";
 window.axios = axios;
 
-// window.Popper = require("@popperjs/core");
-
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 /**
@@ -25,7 +23,7 @@ window.Pusher = Pusher;
 window.Echo = new Echo({
     broadcaster: "pusher",
     key: PUSHER_APP_KEY,
-    cluster: PUSHER_APP_CLUSTER ?? "mt1",
+    cluster: PUSHER_APP_CLUSTER ?? "us3",
     wsHost: import.meta.env.VITE_PUSHER_HOST
         ? import.meta.env.VITE_PUSHER_HOST
         : `ws-${PUSHER_APP_CLUSTER}.pusher.com`,
