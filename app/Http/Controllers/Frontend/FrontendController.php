@@ -4,18 +4,19 @@ namespace App\Http\Controllers\Frontend;
 
 use Session;
 use App\Models\Hero;
+use App\Models\Claim;
 use App\Models\Review;
+use App\Models\Amenity;
 use App\Models\Listing;
 use App\Models\Package;
 use App\Models\Category;
 use App\Models\Location;
 use Illuminate\View\View;
+use App\Models\OurFeature;
 use App\Events\CreateOrder;
 use Illuminate\Http\Request;
 use App\Models\ListingSchedule;
 use App\Http\Controllers\Controller;
-use App\Models\Amenity;
-use App\Models\Claim;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 
@@ -24,6 +25,7 @@ class FrontendController extends Controller
     function index(): View
     {
         $hero = Hero::first();
+        $ourFeatures = OurFeature::where('status', 1)->get();
         $categories = Category::where('status', 1,)->get();
         $locations = Location::where('status', 1)->get();
         $packages = Package::where('status', 1)->where('show_at_home', 1)->limit(3)->get();
@@ -58,7 +60,8 @@ class FrontendController extends Controller
                 'featuredCategories',
                 'featuredLocations',
                 'featuredListings',
-                'locations'
+                'locations',
+                'ourFeatures'
             )
         );
     }

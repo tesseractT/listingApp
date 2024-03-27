@@ -396,6 +396,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\OurFeature
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature query()
+ */
+	class OurFeature extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Package
  *
  * @property int $id

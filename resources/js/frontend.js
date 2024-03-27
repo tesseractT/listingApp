@@ -28,7 +28,6 @@ window.Echo.private("message." + USER.id).listen("Message", (e) => {
 
         if (profileUserId == e.user.id && profileListingId == e.listing_id) {
             $(this).find(".profile_img").addClass("new_message");
-            
         }
     });
 });
