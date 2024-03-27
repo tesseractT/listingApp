@@ -125,6 +125,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Counter
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter query()
+ */
+	class Counter extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Hero
  *
  * @property int $id
@@ -398,9 +409,23 @@ namespace App\Models{
 /**
  * App\Models\OurFeature
  *
+ * @property int $id
+ * @property string $title
+ * @property string $icon
+ * @property string $short_description
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|OurFeature newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OurFeature newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OurFeature query()
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature whereShortDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OurFeature whereUpdatedAt($value)
  */
 	class OurFeature extends \Eloquent {}
 }

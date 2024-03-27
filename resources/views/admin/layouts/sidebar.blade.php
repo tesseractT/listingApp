@@ -195,7 +195,8 @@
                             href="{{ route('admin.hero.index') }}">Hero</a></li>
                     <li class="{{ setSidebarActive(['admin.our-features.index']) }}"><a class="nav-link"
                             href="{{ route('admin.our-features.index') }}">Our Feature</a></li>
-
+                    <li class="{{ setSidebarActive(['admin.counter.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.counter.index') }}">Counter</a></li>
                 </ul>
             </li>
             <li

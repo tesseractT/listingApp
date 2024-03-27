@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ClaimController;
+use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\ListingImageGalleryController;
 use App\Http\Controllers\Admin\ListingVideoGalleryController;
@@ -95,6 +96,9 @@ Route::group([
 
     /** Our Faeture Routes */
     Route::resource('/our-features', OurFeatureController::class);
+
+    /** Counter Routes */
+    Route::resource('/counter', CounterController::class);
 
 
     /** Settings Routes  */
