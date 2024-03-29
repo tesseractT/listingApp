@@ -127,9 +127,33 @@ namespace App\Models{
 /**
  * App\Models\Counter
  *
+ * @property int $id
+ * @property string|null $background
+ * @property int|null $counter_one
+ * @property string|null $counter_one_title
+ * @property int|null $counter_two
+ * @property string|null $counter_two_title
+ * @property int|null $counter_three
+ * @property string|null $counter_three_title
+ * @property int|null $counter_four
+ * @property string|null $counter_four_title
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Counter newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Counter newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Counter query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereBackground($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereCounterFour($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereCounterFourTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereCounterOne($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereCounterOneTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereCounterThree($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereCounterThreeTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereCounterTwo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereCounterTwoTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Counter whereUpdatedAt($value)
  */
 	class Counter extends \Eloquent {}
 }
@@ -573,6 +597,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Subscription whereUserId($value)
  */
 	class Subscription extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Testimonial
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Testimonial newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Testimonial newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Testimonial query()
+ */
+	class Testimonial extends \Eloquent {}
 }
 
 namespace App\Models{

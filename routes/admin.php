@@ -1,27 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminAuthController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\HeroController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\LocationController;
-use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\ChatController;
+use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\ClaimController;
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\ListingController;
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OurFeatureController;
+use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\PaymentSettingController;
+use App\Http\Controllers\Admin\PendingListingController;
+use App\Http\Controllers\Admin\ListingScheduleController;
 use App\Http\Controllers\Admin\ListingImageGalleryController;
 use App\Http\Controllers\Admin\ListingVideoGalleryController;
-use App\Http\Controllers\Admin\ListingScheduleController;
-use App\Http\Controllers\Admin\OurFeatureController;
-use App\Http\Controllers\Admin\PendingListingController;
-use App\Http\Controllers\Admin\PackageController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\PaymentSettingController;
-use App\Http\Controllers\Admin\ReviewController;
-use App\Http\Controllers\OrderController;
 
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('guest');
 Route::get('/admin/forgot-password', [AdminAuthController::class, 'PasswordRequest'])->name('admin.password.request')->middleware('guest');
@@ -96,6 +97,9 @@ Route::group([
 
     /** Our Faeture Routes */
     Route::resource('/our-features', OurFeatureController::class);
+
+    /** Testimonial Routes */
+    Route::resource('/testimonial', TestimonialController::class);
 
     /** Counter Routes */
     Route::resource('/counter', CounterController::class);

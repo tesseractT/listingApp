@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Models\ListingSchedule;
 use App\Http\Controllers\Controller;
 use App\Models\Counter;
+use App\Models\Testimonial;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 
@@ -27,6 +28,7 @@ class FrontendController extends Controller
     {
         $hero = Hero::first();
         $counter = Counter::first();
+        $testimonials = Testimonial::where('status', 1)->get();
         $ourFeatures = OurFeature::where('status', 1)->get();
         $categories = Category::where('status', 1,)->get();
         $locations = Location::where('status', 1)->get();
@@ -64,7 +66,8 @@ class FrontendController extends Controller
                 'featuredListings',
                 'locations',
                 'ourFeatures',
-                'counter'
+                'counter',
+                'testimonials'
             )
         );
     }
