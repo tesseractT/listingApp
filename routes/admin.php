@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\PendingListingController;
 use App\Http\Controllers\Admin\ListingScheduleController;
 use App\Http\Controllers\Admin\ListingImageGalleryController;
 use App\Http\Controllers\Admin\ListingVideoGalleryController;
+use App\Http\Controllers\Admin\PrivacyPolicyController;
 
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('guest');
 Route::get('/admin/forgot-password', [AdminAuthController::class, 'PasswordRequest'])->name('admin.password.request')->middleware('guest');
@@ -125,6 +126,10 @@ Route::group([
     /** Contact Routes */
     Route::get('contact-us', [ContactController::class, 'index'])->name('contact-us.index');
     Route::post('contact-us', [ContactController::class, 'update'])->name('contact-us.update');
+
+    /** Privacy Policy Routes */
+    Route::get('privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy.index');
+    Route::post('privacy-policy', [PrivacyPolicyController::class, 'update'])->name('privacy-policy.update');
 
     /** Settings Routes  */
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');

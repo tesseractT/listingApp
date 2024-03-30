@@ -25,6 +25,7 @@ use App\Mail\ContactMail;
 use App\Models\AboutUs;
 use App\Models\BlogCategory;
 use App\Models\BlogComment;
+use App\Models\PrivacyPolicy;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
@@ -315,5 +316,11 @@ class FrontendController extends Controller
         Mail::to(config('settings.site_email'))->send(new ContactMail($request->name, $request->subject, $request->message));
 
         return back()->with('success', 'Message Sent Successfully');
+    }
+
+    function privacyPolicy(): View
+    {
+        $privacyPolicy = PrivacyPolicy::first();
+        return view('frontend.pages.privacy-policy', compact('privacyPolicy'));
     }
 }

@@ -262,6 +262,8 @@
                             href="{{ route('admin.about-us.index') }}">About Us</a></li>
                     <li class="{{ setSidebarActive(['admin.contact-us.*']) }}"><a class="nav-link"
                             href="{{ route('admin.contact-us.index') }}">Contact Us</a></li>
+                    <li class="{{ setSidebarActive(['admin.privacy-policy.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
 
                 </ul>
             </li>

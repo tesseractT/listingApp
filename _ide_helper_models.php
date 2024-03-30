@@ -243,9 +243,23 @@ namespace App\Models{
 /**
  * App\Models\ContactUs
  *
+ * @property int $id
+ * @property string $phone
+ * @property string $email
+ * @property string $address
+ * @property string $map_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|ContactUs newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ContactUs newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ContactUs query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs whereMapLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs whereUpdatedAt($value)
  */
 	class ContactUs extends \Eloquent {}
 }
@@ -644,6 +658,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentSetting whereValue($value)
  */
 	class PaymentSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\PrivacyPolicy
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|PrivacyPolicy newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PrivacyPolicy newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PrivacyPolicy query()
+ */
+	class PrivacyPolicy extends \Eloquent {}
 }
 
 namespace App\Models{
