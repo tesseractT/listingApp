@@ -29,6 +29,8 @@ use App\Http\Controllers\Admin\ListingScheduleController;
 use App\Http\Controllers\Admin\ListingImageGalleryController;
 use App\Http\Controllers\Admin\ListingVideoGalleryController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
+use App\Http\Controllers\Admin\TermsAndConditions;
+use App\Http\Controllers\Admin\TermsAndConditionsController;
 
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('guest');
 Route::get('/admin/forgot-password', [AdminAuthController::class, 'PasswordRequest'])->name('admin.password.request')->middleware('guest');
@@ -130,6 +132,10 @@ Route::group([
     /** Privacy Policy Routes */
     Route::get('privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy.index');
     Route::post('privacy-policy', [PrivacyPolicyController::class, 'update'])->name('privacy-policy.update');
+
+    /** Terms and Conditions Route */
+    Route::get('terms-and-conditions', [TermsAndConditionsController::class, 'index'])->name('terms-and-conditions.index');
+    Route::post('terms-and-conditions', [TermsAndConditionsController::class, 'update'])->name('terms-and-conditions.update');
 
     /** Settings Routes  */
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');

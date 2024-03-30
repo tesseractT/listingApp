@@ -264,6 +264,8 @@
                             href="{{ route('admin.contact-us.index') }}">Contact Us</a></li>
                     <li class="{{ setSidebarActive(['admin.privacy-policy.*']) }}"><a class="nav-link"
                             href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
+                    <li class="{{ setSidebarActive(['admin.terms-and-conditions.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.terms-and-conditions.index') }}">Terms & Conditions</a></li>
 
                 </ul>
             </li>

@@ -26,6 +26,7 @@ use App\Models\AboutUs;
 use App\Models\BlogCategory;
 use App\Models\BlogComment;
 use App\Models\PrivacyPolicy;
+use App\Models\TermsAndConditions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
@@ -322,5 +323,11 @@ class FrontendController extends Controller
     {
         $privacyPolicy = PrivacyPolicy::first();
         return view('frontend.pages.privacy-policy', compact('privacyPolicy'));
+    }
+
+    function termsAndConditions(): View
+    {
+        $termsAndConditions = TermsAndConditions::first();
+        return view('frontend.pages.terms-and-conditions', compact('termsAndConditions'));
     }
 }

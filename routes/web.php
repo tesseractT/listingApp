@@ -51,6 +51,9 @@ Route::post('contact-us', [FrontendController::class, 'contactMessage'])->name('
 /** Privacy Policy Route  */
 Route::get('privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy.index');
 
+/** Terms and Conditions Route  */
+Route::get('terms-and-conditions', [FrontendController::class, 'termsAndConditions'])->name('terms-and-conditions.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
