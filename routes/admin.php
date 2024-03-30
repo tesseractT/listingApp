@@ -18,6 +18,9 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OurFeatureController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\BlogCommentController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PaymentSettingController;
 use App\Http\Controllers\Admin\PendingListingController;
 use App\Http\Controllers\Admin\ListingScheduleController;
@@ -104,6 +107,14 @@ Route::group([
     /** Counter Routes */
     Route::resource('/counter', CounterController::class);
 
+    /** Blog Category Route */
+    Route::resource('/blog-category', BlogCategoryController::class);
+
+    /** Blog Route */
+    Route::resource('/blog', BlogController::class);
+    Route::get('blog-comment', [BlogCommentController::class, 'index'])->name('blog-comment.index');
+    Route::get('comment-status', [BlogCommentController::class, 'updateCommentStatus'])->name('comment-status.update');
+    Route::delete('blog-comment/{id}', [BlogCommentController::class, 'destroy'])->name('blog-comment.destroy');
 
     /** Settings Routes  */
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');

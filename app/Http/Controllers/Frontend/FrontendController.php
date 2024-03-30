@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use Session;
+use App\Models\Blog;
 use App\Models\Hero;
 use App\Models\Claim;
 use App\Models\Review;
 use App\Models\Amenity;
+use App\Models\Counter;
 use App\Models\Listing;
 use App\Models\Package;
 use App\Models\Category;
@@ -14,11 +16,12 @@ use App\Models\Location;
 use Illuminate\View\View;
 use App\Models\OurFeature;
 use App\Events\CreateOrder;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\ListingSchedule;
 use App\Http\Controllers\Controller;
-use App\Models\Counter;
-use App\Models\Testimonial;
+use App\Models\BlogCategory;
+use App\Models\BlogComment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 
@@ -28,6 +31,7 @@ class FrontendController extends Controller
     {
         $hero = Hero::first();
         $counter = Counter::first();
+        $blogs = Blog::with('author')->where('status', 1)->latest()->limit(3)->get();
         $testimonials = Testimonial::where('status', 1)->get();
         $ourFeatures = OurFeature::where('status', 1)->get();
         $categories = Category::where('status', 1,)->get();
@@ -67,7 +71,8 @@ class FrontendController extends Controller
                 'locations',
                 'ourFeatures',
                 'counter',
-                'testimonials'
+                'testimonials',
+                'blogs'
             )
         );
     }
@@ -231,5 +236,48 @@ class FrontendController extends Controller
         $claim->save();
 
         return back()->with('success', 'Claim Submitted Successfully');
+    }
+
+    function blog(Request $request): View
+    {
+        $blogs = Blog::with('category')->where('status', 1)->orderBy('id', 'desc')
+            ->when($request->has('search') && $request->filled('search'), function ($query) use ($request) {
+                $query->where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('content', 'like', '%' . $request->search . '%');
+            })
+            ->when($request->has('category') && $request->filled('category'), function ($query) use ($request) {
+                $category = BlogCategory::select('id', 'slug')->where('slug', $request->category)->first();
+                $query->where('blog_category_id', $category->id);
+            })
+            ->paginate(9);
+        return view('frontend.pages.blog', compact('blogs'));
+    }
+
+    function blogShow(string $slug): View
+    {
+        $categories = BlogCategory::withCount(['blogs' => function ($query) {
+            $query->where('status', 1);
+        }])->where('status', 1)->get();
+        $blog = Blog::with(['category', 'comments'])->where(['slug' => $slug, 'status' => 1])->firstOrFail();
+        $popularBlogs = Blog::select(['id', 'title', 'slug', 'created_at', 'image'])->where('id', '!=', $blog->id)
+            ->where('is_popular', 1)
+            ->where('status', 1)->orderBy('id', 'desc')->take(5)->get();
+        return view('frontend.pages.blog-show', compact('blog', 'popularBlogs', 'categories'));
+    }
+
+    function submitBlogComment(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'comment' => ['required', 'string', 'max:500'],
+            'blog_id' => ['required', 'integer', 'exists:blogs,id']
+        ]);
+
+        $comment = new BlogComment();
+        $comment->user_id = auth()->user()->id;
+        $comment->blog_id = $request->blog_id;
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        return back()->with('success', 'Comment Submitted Successfully And Awaiting Approval');
     }
 }

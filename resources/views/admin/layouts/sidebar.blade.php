@@ -227,7 +227,7 @@
             </li>
             <li class="dropdown {{ setSidebarActive(['admin.package.index']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                        class="fas fa-columns"></i> <span>Manage Packages & Payments</span></a>
+                        class="fas fa-columns"></i> <span>Manage Packages</span></a>
 
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.package.*']) }}"><a class="nav-link"
@@ -240,9 +240,23 @@
                         Orders</span></a></li>
             <li><a class="nav-link" href="{{ route('admin.messages.index') }}"><i class="far fa-square"></i> <span>
                         Messages</span></a></li>
+            <li class="dropdown {{ setSidebarActive(['admin.blog-category.index']) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-columns"></i> <span>Manage Blog</span></a>
+
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['admin.blog-category.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.blog-category.index') }}">Blog Categories</a></li>
+                    <li class="{{ setSidebarActive(['admin.blog.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.blog.index') }}">Blog Posts</a></li>
+                    <li class="{{ setSidebarActive(['admin.blog-comment.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.blog-comment.index') }}">Blog Comments</a></li>
+                </ul>
+            </li>
             <li><a class="nav-link" href="{{ route('admin.testimonial.index') }}"><i class="far fa-square"></i>
                     <span>
                         Testimonials</span></a></li>
+
             <li><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="far fa-square"></i> <span>
                         Settings</span></a></li>
         </ul>

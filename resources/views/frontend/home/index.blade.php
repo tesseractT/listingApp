@@ -2,91 +2,91 @@
 
 @section('contents')
     <!--==========================
-                                                                                                    BANNER PART START
-                                                                                                ===========================-->
+                                                                                                        BANNER PART START
+                                                                                                    ===========================-->
     @include('frontend.home.sections.banner-section')
     <!--==========================
-                                                                                                       BANNER PART END
-                                                                                                   ===========================-->
+                                                                                                           BANNER PART END
+                                                                                                       ===========================-->
 
 
     <!--==========================
-                                                                                                       CATEGORY SLIDER START
-                                                                                                   ===========================-->
+                                                                                                           CATEGORY SLIDER START
+                                                                                                       ===========================-->
     @include('frontend.home.sections.category-slider-section')
     <!--==========================
-                                                                                                       CATEGORY SLIDER END
-                                                                                                   ===========================-->
+                                                                                                           CATEGORY SLIDER END
+                                                                                                       ===========================-->
 
 
     <!--==========================
-                                                                                                       FEATURES PART START
-                                                                                                   ===========================-->
+                                                                                                           FEATURES PART START
+                                                                                                       ===========================-->
     @include('frontend.home.sections.features-section')
     <!--==========================
-                                                                                                       FEATURES PART END
-                                                                                                   ===========================-->
+                                                                                                           FEATURES PART END
+                                                                                                       ===========================-->
 
 
     <!--==========================
-                                                                                                       COUNTER PART START
-                                                                                                   ===========================-->
+                                                                                                           COUNTER PART START
+                                                                                                       ===========================-->
     @include('frontend.home.sections.counter-section')
     <!--==========================
-                                                                                                       COUNTER PART END
-                                                                                                   ===========================-->
+                                                                                                           COUNTER PART END
+                                                                                                       ===========================-->
 
 
     <!--==========================
-                                                                                                       OUR CATEGORY START
-                                                                                                   ===========================-->
+                                                                                                           OUR CATEGORY START
+                                                                                                       ===========================-->
     @include('frontend.home.sections.featured-category-section')
     <!--==========================
-                                                                                                       OUR CATEGORY END
-                                                                                                   ===========================-->
+                                                                                                           OUR CATEGORY END
+                                                                                                       ===========================-->
 
 
     <!--==========================
-                                                                                                       OUR LOCATION START
-                                                                                                   ===========================-->
+                                                                                                           OUR LOCATION START
+                                                                                                       ===========================-->
     @include('frontend.home.sections.featured-location-section')
     <!--==========================
-                                                                                                       OUR LOCATION END
-                                                                                                   ===========================-->
+                                                                                                           OUR LOCATION END
+                                                                                                       ===========================-->
 
 
     <!--==========================
-                                                                                                       FEATURED LISTING START
-                                                                                                   ===========================-->
+                                                                                                           FEATURED LISTING START
+                                                                                                       ===========================-->
     @include('frontend.home.sections.featured-listing-section')
     <!--==========================
-                                                         FEATURED LISTING END
-                                                        ===========================-->
+                                                             FEATURED LISTING END
+                                                            ===========================-->
 
 
     <!--==========================
-                                                                                                       OUR PACKAGE START
-                                                                                                   ===========================-->
+                                                                                                           OUR PACKAGE START
+                                                                                                       ===========================-->
     @include('frontend.home.sections.featured-package-section')
     <!--==========================
-                                                                                                       OUR PACKAGE END
-                                                                                                   ===========================-->
+                                                                                                           OUR PACKAGE END
+                                                                                                       ===========================-->
 
 
     <!--============================
-                                                                                                       TESTIMONIAL PART START
-                                                                                                   ==============================-->
+                                                                                                           TESTIMONIAL PART START
+                                                                                                       ==============================-->
     @include('frontend.home.sections.testimonial-section')
     <!--============================
-                                                                                                       TESTIMONIAL PART END
-                                                                                                   ==============================-->
+                                                                                                           TESTIMONIAL PART END
+                                                                                                       ==============================-->
 
 
     <!--==========================
-                                                                                                       BLOG PART START
-                                                                                                   ===========================-->
-    {{-- @include('frontend.home.sections.blog-section') --}}
+                                                                                                           BLOG PART START
+                                                                                                       ===========================-->
+    @include('frontend.home.sections.blog-section')
     <!--==========================
-                                                                                                       BLOG PART END
-                                                                                                   ===========================-->
+                                                                                                           BLOG PART END
+                                                                                                       ===========================-->
 @endsection

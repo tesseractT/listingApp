@@ -36,7 +36,10 @@ Route::post('listing-review', [FrontendController::class, 'submitReview'])->name
 /** Claim Route  */
 Route::post('listing-claim', [FrontendController::class, 'submitClaim'])->name('submit-claim');
 
-
+/** Blog Route  */
+Route::get('blog', [FrontendController::class, 'blog'])->name('blog.index');
+Route::get('blog/{slug}', [FrontendController::class, 'blogShow'])->name('blog.show');
+Route::post('blog-comment', [FrontendController::class, 'submitBlogComment'])->name('blog-comment.store')->middleware('auth');
 
 
 Route::middleware('auth')->group(function () {
