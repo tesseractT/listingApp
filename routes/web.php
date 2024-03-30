@@ -41,6 +41,9 @@ Route::get('blog', [FrontendController::class, 'blog'])->name('blog.index');
 Route::get('blog/{slug}', [FrontendController::class, 'blogShow'])->name('blog.show');
 Route::post('blog-comment', [FrontendController::class, 'submitBlogComment'])->name('blog-comment.store')->middleware('auth');
 
+/** About Route  */
+Route::get('about-us', [FrontendController::class, 'aboutIndex'])->name('about.index');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

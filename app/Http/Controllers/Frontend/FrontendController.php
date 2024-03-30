@@ -20,6 +20,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\ListingSchedule;
 use App\Http\Controllers\Controller;
+use App\Models\AboutUs;
 use App\Models\BlogCategory;
 use App\Models\BlogComment;
 use Illuminate\Http\RedirectResponse;
@@ -279,5 +280,16 @@ class FrontendController extends Controller
         $comment->save();
 
         return back()->with('success', 'Comment Submitted Successfully And Awaiting Approval');
+    }
+
+    function aboutIndex(): View
+    {
+        $about = AboutUs::first();
+        $ourFeatures = OurFeature::where('status', 1)->get();
+        $counter = Counter::first();
+        $featuredCategories = Category::withCount(['listings' => function ($query) {
+            $query->where('is_approved', 1);
+        }])->where(['show_at_home' => 1, 'status' => 1])->take(6)->get();
+        return view('frontend.pages.about', compact('about', 'ourFeatures', 'featuredCategories', 'counter'));
     }
 }

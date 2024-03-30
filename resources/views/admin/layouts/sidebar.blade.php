@@ -253,6 +253,16 @@
                             href="{{ route('admin.blog-comment.index') }}">Blog Comments</a></li>
                 </ul>
             </li>
+            <li class="dropdown {{ setSidebarActive(['admin.blog-category.index']) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-columns"></i> <span>Pages</span></a>
+
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['admin.about-us.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.about-us.index') }}">About Us</a></li>
+
+                </ul>
+            </li>
             <li><a class="nav-link" href="{{ route('admin.testimonial.index') }}"><i class="far fa-square"></i>
                     <span>
                         Testimonials</span></a></li>

@@ -13,6 +13,17 @@
 
 namespace App\Models{
 /**
+ * App\Models\AboutUs
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs query()
+ */
+	class AboutUs extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Amenity
  *
  * @property int $id

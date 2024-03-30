@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\ChatController;
@@ -115,6 +116,10 @@ Route::group([
     Route::get('blog-comment', [BlogCommentController::class, 'index'])->name('blog-comment.index');
     Route::get('comment-status', [BlogCommentController::class, 'updateCommentStatus'])->name('comment-status.update');
     Route::delete('blog-comment/{id}', [BlogCommentController::class, 'destroy'])->name('blog-comment.destroy');
+
+    /** About Routes */
+    Route::get('about-us', [AboutController::class, 'index'])->name('about-us.index');
+    Route::post('about-us', [AboutController::class, 'update'])->name('about-us.update');
 
     /** Settings Routes  */
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
