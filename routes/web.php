@@ -44,6 +44,9 @@ Route::post('blog-comment', [FrontendController::class, 'submitBlogComment'])->n
 /** About Route  */
 Route::get('about-us', [FrontendController::class, 'aboutIndex'])->name('about.index');
 
+/** Contact Route  */
+Route::get('contact-us', [FrontendController::class, 'contactIndex'])->name('contact.index');
+Route::post('contact-us', [FrontendController::class, 'contactMessage'])->name('contact.message');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

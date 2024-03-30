@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\ChatController;
@@ -120,6 +121,10 @@ Route::group([
     /** About Routes */
     Route::get('about-us', [AboutController::class, 'index'])->name('about-us.index');
     Route::post('about-us', [AboutController::class, 'update'])->name('about-us.update');
+
+    /** Contact Routes */
+    Route::get('contact-us', [ContactController::class, 'index'])->name('contact-us.index');
+    Route::post('contact-us', [ContactController::class, 'update'])->name('contact-us.update');
 
     /** Settings Routes  */
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');

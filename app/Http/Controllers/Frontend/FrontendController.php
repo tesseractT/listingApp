@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\ContactUs;
 use Session;
 use App\Models\Blog;
 use App\Models\Hero;
@@ -20,10 +21,12 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\ListingSchedule;
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
 use App\Models\AboutUs;
 use App\Models\BlogCategory;
 use App\Models\BlogComment;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 class FrontendController extends Controller
@@ -291,5 +294,26 @@ class FrontendController extends Controller
             $query->where('is_approved', 1);
         }])->where(['show_at_home' => 1, 'status' => 1])->take(6)->get();
         return view('frontend.pages.about', compact('about', 'ourFeatures', 'featuredCategories', 'counter'));
+    }
+
+    function contactIndex(): View
+    {
+        $contact = ContactUs::first();
+        return view('frontend.pages.contact', compact('contact'));
+    }
+
+    function contactMessage(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:200'],
+            'email' => ['required', 'email', 'max:50'],
+            'subject' => ['required', 'string', 'max:200'],
+            'message' => ['required', 'string', 'max:500']
+        ]);
+
+        // Send Email
+        Mail::to(config('settings.site_email'))->send(new ContactMail($request->name, $request->subject, $request->message));
+
+        return back()->with('success', 'Message Sent Successfully');
     }
 }

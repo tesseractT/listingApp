@@ -260,6 +260,8 @@
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.about-us.*']) }}"><a class="nav-link"
                             href="{{ route('admin.about-us.index') }}">About Us</a></li>
+                    <li class="{{ setSidebarActive(['admin.contact-us.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.contact-us.index') }}">Contact Us</a></li>
 
                 </ul>
             </li>

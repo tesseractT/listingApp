@@ -15,9 +15,23 @@ namespace App\Models{
 /**
  * App\Models\AboutUs
  *
+ * @property int $id
+ * @property string $image
+ * @property string $video_url
+ * @property string $description
+ * @property string $button_url
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|AboutUs newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AboutUs newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AboutUs query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs whereButtonUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AboutUs whereVideoUrl($value)
  */
 	class AboutUs extends \Eloquent {}
 }
@@ -223,6 +237,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Claim whereUpdatedAt($value)
  */
 	class Claim extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ContactUs
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactUs query()
+ */
+	class ContactUs extends \Eloquent {}
 }
 
 namespace App\Models{
