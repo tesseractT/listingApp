@@ -301,6 +301,33 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\FooterInfo
+ *
+ * @property int $id
+ * @property string $short_description
+ * @property string $address
+ * @property string $email
+ * @property string $phone
+ * @property string $copyright
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo whereCopyright($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo whereShortDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FooterInfo whereUpdatedAt($value)
+ */
+	class FooterInfo extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Hero
  *
  * @property int $id
@@ -731,6 +758,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\SocialLink
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink query()
+ */
+	class SocialLink extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Subscription
  *
  * @property int $id
@@ -763,9 +801,17 @@ namespace App\Models{
 /**
  * App\Models\TermsAndConditions
  *
+ * @property int $id
+ * @property string $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|TermsAndConditions newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TermsAndConditions newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TermsAndConditions query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TermsAndConditions whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TermsAndConditions whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TermsAndConditions whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TermsAndConditions whereUpdatedAt($value)
  */
 	class TermsAndConditions extends \Eloquent {}
 }

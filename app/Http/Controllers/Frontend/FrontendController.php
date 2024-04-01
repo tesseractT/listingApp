@@ -25,6 +25,7 @@ use App\Mail\ContactMail;
 use App\Models\AboutUs;
 use App\Models\BlogCategory;
 use App\Models\BlogComment;
+use App\Models\FooterInfo;
 use App\Models\PrivacyPolicy;
 use App\Models\TermsAndConditions;
 use Illuminate\Http\RedirectResponse;
@@ -37,6 +38,7 @@ class FrontendController extends Controller
     {
         $hero = Hero::first();
         $counter = Counter::first();
+        $footerInfo = FooterInfo::first();
         $blogs = Blog::with('author')->where('status', 1)->latest()->limit(3)->get();
         $testimonials = Testimonial::where('status', 1)->get();
         $ourFeatures = OurFeature::where('status', 1)->get();
@@ -78,7 +80,8 @@ class FrontendController extends Controller
                 'ourFeatures',
                 'counter',
                 'testimonials',
-                'blogs'
+                'blogs',
+                'footerInfo'
             )
         );
     }

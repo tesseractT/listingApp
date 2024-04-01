@@ -269,9 +269,24 @@
 
                 </ul>
             </li>
+
+            <li class="dropdown {{ setSidebarActive(['admin.footer-info.index']) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-columns"></i> <span>Manage Footer</span></a>
+
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['admin.footer-info.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.footer-info.index') }}">Footer Info</a></li>
+                    <li class="{{ setSidebarActive(['admin.social-link.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.social-link.index') }}">Social Links</a></li>
+                </ul>
+            </li>
             <li><a class="nav-link" href="{{ route('admin.testimonial.index') }}"><i class="far fa-square"></i>
                     <span>
                         Testimonials</span></a></li>
+            <li><a class="nav-link" href="{{ route('admin.menu-builder.index') }}"><i class="far fa-square"></i>
+                    <span>
+                        Menu Builder</span></a></li>
 
             <li><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="far fa-square"></i> <span>
                         Settings</span></a></li>

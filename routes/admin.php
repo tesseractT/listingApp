@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\FooterInfoController;
+use App\Http\Controllers\Admin\SocialLinkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\ChatController;
@@ -28,6 +30,7 @@ use App\Http\Controllers\Admin\PendingListingController;
 use App\Http\Controllers\Admin\ListingScheduleController;
 use App\Http\Controllers\Admin\ListingImageGalleryController;
 use App\Http\Controllers\Admin\ListingVideoGalleryController;
+use App\Http\Controllers\Admin\MenuBuilderController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\TermsAndConditions;
 use App\Http\Controllers\Admin\TermsAndConditionsController;
@@ -136,6 +139,16 @@ Route::group([
     /** Terms and Conditions Route */
     Route::get('terms-and-conditions', [TermsAndConditionsController::class, 'index'])->name('terms-and-conditions.index');
     Route::post('terms-and-conditions', [TermsAndConditionsController::class, 'update'])->name('terms-and-conditions.update');
+
+    /** Footer Info Route */
+    Route::get('footer-info', [FooterInfoController::class, 'index'])->name('footer-info.index');
+    Route::post('footer-info', [FooterInfoController::class, 'update'])->name('footer-info.update');
+
+    /** Social link Route */
+    Route::resource('/social-link', SocialLinkController::class);
+
+    /** Menu Builder Route */
+    Route::get('menu-builder', [MenuBuilderController::class, 'index'])->name('menu-builder.index');
 
     /** Settings Routes  */
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');

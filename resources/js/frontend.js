@@ -8,7 +8,7 @@ window.Echo.private("message." + USER.id).listen("Message", (e) => {
     let userId = $(".main_chat_inbox").attr("data-inbox-user");
     let listingId = $(".main_chat_inbox").attr("data-inbox-listing");
     // do something
-    if (userId === e.user.id && listingId === e.listing_id) {
+    if (userId == e.user.id && listingId == e.listing_id) {
         var message = `  <div class="tf__chating">
     <div class="tf__chating_img">
         <img src="${e.user.avatar}" alt="person"
