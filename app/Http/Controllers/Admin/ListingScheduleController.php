@@ -16,6 +16,13 @@ use App\Models\Listing;
 
 class ListingScheduleController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:listing index', ['only' => ['index',]]);
+        $this->middleware('permission:listing update', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:listing create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:listing delete', ['only' => ['destroy']]);
+    }
     public function index(ListingScheduleDataTable $listingScheduleDataTable, string $listing_id): View | JsonResponse
     {
         $listingScheduleDataTable->with('listing_id', $listing_id);

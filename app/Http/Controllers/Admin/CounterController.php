@@ -12,7 +12,14 @@ use Illuminate\Http\RedirectResponse;
 
 class CounterController extends Controller
 {
+
     use FileUploadTrait;
+
+    function __construct()
+    {
+        $this->middleware('permission:section index', ['only' => ['index',]]);
+        $this->middleware('permission:section update', ['only' => ['update',]]);
+    }
     /**
      * Display a listing of the resource.
      */

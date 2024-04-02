@@ -7,10 +7,8 @@
              <div class="col-xl-6 col-md-7 d-none d-md-block">
                  <ul class="wsus__topbar_left">
                      <li><a href="mailto:support@websolutionus.com"><i class="fal fa-envelope"></i>
-                             {{ $footerInfo?->email }}</a></li>
-                     <li><a href="callto:{{ $footerInfo?->phone }}"><i
-                                 class="fal fa-phone-alt"></i>{{ $footerInfo?->phone }}</a>
-                     </li>
+                             @gmail.com</a></li>
+                     <li><a href="callto:+6958474522655"><i class="fal fa-phone-alt"></i>+6958474522655</a></li>
                  </ul>
              </div>
              <div class="col-xl-6 col-md-5">

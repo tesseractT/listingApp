@@ -12,6 +12,11 @@ use Illuminate\Http\Response;
 
 class ReviewController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:listing review');
+    }
     function index(ReviewDataTable $reviewDataTable): View | JsonResponse
     {
         return $reviewDataTable->render('admin.listing.listing-review.index');

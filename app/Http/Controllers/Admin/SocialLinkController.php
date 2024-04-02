@@ -14,6 +14,10 @@ use Illuminate\View\View;
 
 class SocialLinkController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:social index');
+    }
     /**
      * Display a listing of the resource.
      */

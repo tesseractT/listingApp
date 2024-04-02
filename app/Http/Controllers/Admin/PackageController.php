@@ -13,6 +13,14 @@ use App\Models\Package;
 
 class PackageController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:package index', ['only' => ['index',]]);
+        $this->middleware('permission:package update', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:package create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:package delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

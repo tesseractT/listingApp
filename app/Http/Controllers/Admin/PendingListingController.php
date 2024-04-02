@@ -12,6 +12,10 @@ use App\Models\Listing;
 
 class PendingListingController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:pending listing');
+    }
     function index(PendingListingDataTable $pendingListingDataTable): View | JsonResponse
     {
         return $pendingListingDataTable->render('admin.pending-listing.index');

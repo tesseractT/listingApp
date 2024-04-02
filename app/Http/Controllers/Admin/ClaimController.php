@@ -12,6 +12,10 @@ use Illuminate\Http\Response;
 
 class ClaimController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:listing claim');
+    }
     function index(ClaimDataTable $dataTable): JsonResponse | View
     {
         return $dataTable->render('admin.claim.index');

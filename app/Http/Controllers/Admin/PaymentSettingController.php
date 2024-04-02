@@ -10,6 +10,10 @@ use App\Services\PaymentSettingsService;
 
 class PaymentSettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:payment settings index');
+    }
     function index()
     {
         return view('admin.payment-setting.index');

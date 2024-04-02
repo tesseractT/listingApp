@@ -8,7 +8,11 @@ use Illuminate\View\View;
 
 class MenuBuilderController extends Controller
 {
-    function index() :View
+    public function __construct()
+    {
+        $this->middleware('permission:menu builder index');
+    }
+    function index(): View
     {
         return view('admin.menu-builder.index');
     }

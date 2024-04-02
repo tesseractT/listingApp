@@ -12,6 +12,10 @@ use Artisan;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:settings index');
+    }
     function index(): View
     {
         return view('admin.setting.index');

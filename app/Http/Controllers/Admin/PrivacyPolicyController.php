@@ -10,6 +10,10 @@ use Illuminate\View\View;
 
 class PrivacyPolicyController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:privacy policy index');
+    }
     function index(): View
     {
         $privacyPolicy = PrivacyPolicy::first();

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\FooterInfoController;
+use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\Admin\ListingImageGalleryController;
 use App\Http\Controllers\Admin\ListingVideoGalleryController;
 use App\Http\Controllers\Admin\MenuBuilderController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
+use App\Http\Controllers\Admin\RoleUserController;
 use App\Http\Controllers\Admin\TermsAndConditions;
 use App\Http\Controllers\Admin\TermsAndConditionsController;
 
@@ -146,6 +148,12 @@ Route::group([
 
     /** Social link Route */
     Route::resource('/social-link', SocialLinkController::class);
+
+    /** Role Route */
+    Route::resource('/role', RolePermissionController::class);
+
+    /** Role Users Route */
+   Route::resource('/role-user', RoleUserController::class);
 
     /** Menu Builder Route */
     Route::get('menu-builder', [MenuBuilderController::class, 'index'])->name('menu-builder.index');

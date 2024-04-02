@@ -760,9 +760,21 @@ namespace App\Models{
 /**
  * App\Models\SocialLink
  *
+ * @property int $id
+ * @property string $icon
+ * @property string $url
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereUrl($value)
  */
 	class SocialLink extends \Eloquent {}
 }
@@ -871,13 +883,19 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read int|null $roles_count
  * @property-read \App\Models\Subscription|null $subscription
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAbout($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatar($value)
@@ -898,6 +916,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereWaLink($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereWebsite($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereXLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
  */
 	class User extends \Eloquent {}
 }
