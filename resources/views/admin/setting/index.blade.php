@@ -32,19 +32,22 @@
                                                 Settings</a>
                                         </li>
                                         <li class="nav-item">
+                                            <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#contact4"
+                                                role="tab" aria-controls="contact" aria-selected="false">Logo &
+                                                Favicon Settings</a>
+                                        </li>
+                                        <li class="nav-item">
                                             <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4"
                                                 role="tab" aria-controls="profile" aria-selected="false">Pusher Settings
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#contact4"
-                                                role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                                        </li>
+
                                     </ul>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-10">
                                     <div class="tab-content no-padding" id="myTab2Content">
                                         @include('admin.setting.sections.general-settings')
+                                        @include('admin.setting.sections.logo-settings')
                                         @include('admin.setting.sections.pusher-settings')
                                     </div>
                                 </div>

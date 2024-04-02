@@ -153,7 +153,7 @@ Route::group([
     Route::resource('/role', RolePermissionController::class);
 
     /** Role Users Route */
-   Route::resource('/role-user', RoleUserController::class);
+    Route::resource('/role-user', RoleUserController::class);
 
     /** Menu Builder Route */
     Route::get('menu-builder', [MenuBuilderController::class, 'index'])->name('menu-builder.index');
@@ -161,8 +161,11 @@ Route::group([
     /** Settings Routes  */
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/general-settings', [SettingController::class, 'updateGeneralSetting'])->name('general-settings.update');
+    Route::post('/logo-settings', [SettingController::class, 'logoSettings'])->name('logo-settings.update');
+
     //pusher settings
     Route::post('/pusher-settings', [SettingController::class, 'updatePusherSetting'])->name('pusher-settings.update');
+
 
 
     /** Payment Settings Routes  */

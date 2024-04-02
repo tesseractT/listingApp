@@ -9,9 +9,11 @@ use Illuminate\View\View;
 use App\Services\SettingsService;
 use App\Models\Setting;
 use Artisan;
+use App\Traits\FileUploadTrait;
 
 class SettingController extends Controller
 {
+    use FileUploadTrait;
     public function __construct()
     {
         $this->middleware('permission:settings index');
@@ -70,5 +72,36 @@ class SettingController extends Controller
         Artisan::call('config:cache');
 
         return back()->with('success', 'Pusher settings updated successfully');
+    }
+
+    function logoSettings(Request $request)
+    {
+        $request->validate([
+            'logo' => ['nullable', 'image', 'max:300'],
+            'favicon' => ['nullable', 'image', 'max:300'],
+
+        ]);
+
+        $logoPath = $this->uploadImage($request, 'logo', $request->old_logo);
+        $faviconPath = $this->uploadImage($request, 'favicon', $request->old_favicon);
+
+
+        Setting::updateOrCreate(
+            ['key' => 'logo'],
+            ['value' => !empty($logoPath) ? $logoPath : $request->old_logo]
+        );
+
+        Setting::updateOrCreate(
+            ['key' => 'favicon'],
+            ['value' => !empty($faviconPath) ? $faviconPath : $request->old_favicon]
+        );
+
+
+        $settingsService = app()->make(SettingsService::class);
+        $settingsService->clearCachedSettings();
+
+        Artisan::call('config:cache');
+
+        return back()->with('success', 'Logo settings updated successfully');
     }
 }
