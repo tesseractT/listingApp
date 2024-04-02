@@ -41,6 +41,13 @@
                                                 role="tab" aria-controls="profile" aria-selected="false">Pusher Settings
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="appearance-tab5" data-toggle="tab"
+                                                href="#appearance-settings" role="tab"
+                                                aria-controls="appearance-settings" aria-selected="false">Appearance
+                                                Settings
+                                            </a>
+                                        </li>
 
                                     </ul>
                                 </div>
@@ -49,6 +56,8 @@
                                         @include('admin.setting.sections.general-settings')
                                         @include('admin.setting.sections.logo-settings')
                                         @include('admin.setting.sections.pusher-settings')
+                                        @include('admin.setting.sections.appearance-settings')
+
                                     </div>
                                 </div>
                             </div>

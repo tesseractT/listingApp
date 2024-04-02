@@ -104,4 +104,26 @@ class SettingController extends Controller
 
         return back()->with('success', 'Logo settings updated successfully');
     }
+
+    function appearanceSettings(Request $request): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'default_site_color' => ['required'],
+
+        ]);
+
+        foreach ($validatedData as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+
+        $settingsService = app()->make(SettingsService::class);
+        $settingsService->clearCachedSettings();
+
+        Artisan::call('config:cache');
+
+        return back()->with('success', 'Appearance settings updated successfully');
+    }
 }

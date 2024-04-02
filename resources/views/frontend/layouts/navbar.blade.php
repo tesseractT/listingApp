@@ -29,7 +29,7 @@
     ===========================-->
  <nav class="navbar navbar-expand-lg main_menu">
      <div class="container">
-         <a class="navbar-brand" href="index.html">
+         <a class="navbar-brand" href="{{ url('/') }}">
              <img src="{{ asset(config('settings.logo')) }}" alt="Home Gurus">
          </a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
