@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\AgentListingScheduleController;
 use App\Http\Controllers\Frontend\ChatController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Frontend\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], func
     /** Orders Routes  */
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+
+    /** Review Routes  */
+
+    Route::resource('/reviews', ReviewController::class);
 });
 
 /** Payment Routes  */

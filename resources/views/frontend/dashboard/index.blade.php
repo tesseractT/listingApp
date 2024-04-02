@@ -13,29 +13,29 @@
                                 <div class="col-xl-6 col-12 col-sm-6 col-lg-6 col-xxl-3">
                                     <div class="manage_dashboard_single">
                                         <i class="far fa-star"></i>
-                                        <h3>116</h3>
+                                        <h3>{{ $reviewCount }}</h3>
                                         <p>Total Reviews</p>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-12 col-sm-6 col-lg-6 col-xxl-3">
-                                    <div class="manage_dashboard_single orange">
+                                    <div class="manage_dashboard_single  green">
                                         <i class="fas fa-list-ul"></i>
-                                        <h3>21</h3>
-                                        <p>active listing</p>
+                                        <h3>{{ $activeListingCount }}</h3>
+                                        <p>active listings</p>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-12 col-sm-6 col-lg-6 col-xxl-3">
-                                    <div class="manage_dashboard_single green">
+                                    <div class="manage_dashboard_single orange ">
                                         <i class="far fa-heart"></i>
-                                        <h3>35</h3>
-                                        <p>wishlist</p>
+                                        <h3>{{ $pendingListingCount }}</h3>
+                                        <p>Pending Listings</p>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-12 col-sm-6 col-lg-6 col-xxl-3">
                                     <div class="manage_dashboard_single red">
                                         <i class="fal fa-comment-alt-dots"></i>
-                                        <h3>120</h3>
-                                        <p>message</p>
+                                        <h3>{{ $listingCount }}</h3>
+                                        <p>total listings</p>
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
@@ -73,27 +73,56 @@
                                                         <tr>
                                                             <td class="active_left">Maximum Listing </td>
                                                             <td class="package_right">
-                                                                {{ $subscription->package->num_of_listings }}</td>
+
+                                                                @if ($subscription->package->num_of_listings == -1)
+                                                                    Unlimited
+                                                                @else
+                                                                    {{ $subscription->package->num_of_listings }}
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="active_left">Maximum Aminities</td>
                                                             <td class="package_right">
-                                                                {{ $subscription->package->num_of_amenities }}</td>
+                                                                @if ($subscription->package->num_of_amenities == -1)
+                                                                    Unlimited
+                                                                @else
+                                                                    {{ $subscription->package->num_of_amenities }}
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="active_left">Maximum Photo</td>
                                                             <td class="package_right">
-                                                                {{ $subscription->package->num_of_photos }}</td>
+
+                                                                @if ($subscription->package->num_of_photos == -1)
+                                                                    Unlimited
+                                                                @else
+                                                                    {{ $subscription->package->num_of_photos }}
+                                                                @endif
+
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="active_left">Maximum Video</td>
                                                             <td class="package_right">
-                                                                {{ $subscription->package->num_of_videos }}</td>
+                                                                @if ($subscription->package->num_of_videos == -1)
+                                                                    Unlimited
+                                                                @else
+                                                                    {{ $subscription->package->num_of_videos }}
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="active_left">Featured Listing Available</td>
                                                             <td class="package_right">
-                                                                {{ $subscription->package->num_of_featured_listing }}</td>
+                                                                @if ($subscription->package->num_of_featured_listing == -1)
+                                                                    Unlimited
+                                                                @else
+                                                                    {{ $subscription->package->num_of_featured_listing }}
+                                                                @endif
+
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

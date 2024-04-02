@@ -10,7 +10,15 @@
                     <div class="dashboard_content">
                         <div class="my_listing">
                             <h4 style="justify-content: space-between">my listings
-                                <a href="{{ route('user.listing.create') }}" class="btn btn-success">Create</a>
+
+
+                                @if ($subscription === null)
+                                    <a href="{{ route('packages') }}" class="btn btn-warning">Upgrade to
+                                        create</a>
+                                @else
+                                    <a href="{{ route('user.listing.create') }}" class="btn btn-success">Create</a>
+                                @endif
+
                             </h4>
                             {{ $dataTable->table() }}
 

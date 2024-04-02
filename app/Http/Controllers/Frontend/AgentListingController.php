@@ -29,7 +29,9 @@ class AgentListingController extends Controller
      */
     public function index(AgentListingDataTable $agentListingDataTable): View | JsonResponse
     {
-        return $agentListingDataTable->render('frontend.dashboard.listing.index');
+        $subscription = Subscription::with('package')->where('user_id', auth()->id())->first();
+
+        return $agentListingDataTable->render('frontend.dashboard.listing.index', compact('subscription'));
     }
 
     /**
@@ -41,6 +43,9 @@ class AgentListingController extends Controller
         $locations = Location::all();
         $amenities = Amenity::all();
         $subscription = Subscription::with('package')->where('user_id', auth()->id())->first();
+        if ($subscription === null) {
+            abort(403, 'You need to subscribe to a package to create a listing');
+        }
         return view('frontend.dashboard.listing.create', compact('categories', 'locations', 'amenities', 'subscription'));
     }
 
@@ -105,6 +110,10 @@ class AgentListingController extends Controller
         }
         $listingAmenities = ListingAmenity::where('listing_id', $listing->id)->pluck('amenity_id')->toArray();
         $subscription = Subscription::with('package')->where('user_id', auth()->id())->first();
+
+        if ($subscription === null) {
+            abort(403, 'You need to subscribe to a package to edit a listing');
+        }
 
         $categories = Category::all();
         $locations = Location::all();
