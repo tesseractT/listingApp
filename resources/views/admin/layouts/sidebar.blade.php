@@ -61,7 +61,12 @@
             {{-- Sections --}}
             @can('section index')
                 <li
-                    class="dropdown {{ setSidebarActive(['admin.hero.index', 'admin.our-features.index', 'admin.counter.index']) }}">
+                    class="dropdown {{ setSidebarActive([
+                        'admin.hero.index',
+                        'admin.our-features.index',
+                        'admin.counter.index',
+                        'admin.section-title.index',
+                    ]) }}">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                         <span>Sections</span></a>
 
@@ -72,6 +77,8 @@
                                 href="{{ route('admin.our-features.index') }}">Our Feature</a></li>
                         <li class="{{ setSidebarActive(['admin.counter.index']) }}"><a class="nav-link"
                                 href="{{ route('admin.counter.index') }}">Counter</a></li>
+                        <li class="{{ setSidebarActive(['admin.section-title.index']) }}"><a class="nav-link"
+                                href="{{ route('admin.section-title.index') }}">Section Titles</a></li>
                     </ul>
                 </li>
             @endcan

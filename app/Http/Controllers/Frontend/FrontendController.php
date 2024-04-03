@@ -27,10 +27,12 @@ use App\Models\BlogCategory;
 use App\Models\BlogComment;
 use App\Models\FooterInfo;
 use App\Models\PrivacyPolicy;
+use App\Models\SectionTitle;
 use App\Models\TermsAndConditions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+
 
 class FrontendController extends Controller
 {
@@ -38,6 +40,7 @@ class FrontendController extends Controller
     {
         $hero = Hero::first();
         $counter = Counter::first();
+        $sectionTitle = SectionTitle::first();
         $footerInfo = FooterInfo::first();
         $blogs = Blog::with('author')->where('status', 1)->latest()->limit(3)->get();
         $testimonials = Testimonial::where('status', 1)->get();
@@ -57,8 +60,25 @@ class FrontendController extends Controller
                 ->withCount(['reviews' => function ($query) {
                     $query->where('is_approved', 1);
                 }])
-                ->where(['is_approved' => 1, 'status' => 1])->orderBy('id', 'desc')->limit(3);
+                ->where(['is_approved' => 1, 'status' => 1])->orderBy('id', 'desc');
         }])->where(['show_at_home' =>  1, 'status' => 1])->get();
+
+        $featuredLocations = Location::where(['show_at_home' =>  1, 'status' => 1])->get();
+
+        $featuredLocations->each(function ($location) {
+            $location->listings = $location->listings()
+                ->withAvg(['reviews' => function ($query) {
+                    $query->where('is_approved', 1);
+                }], 'rating')
+
+                ->withCount(['reviews' => function ($query) {
+                    $query->where('is_approved', 1);
+                }])
+
+                ->where(['is_approved' => 1, 'status' => 1])
+                ->orderBy('id', 'desc')
+                ->take(8)->get();
+        });
 
         // Featured Listings
         $featuredListings = Listing::withAvg(['reviews' => function ($query) {
@@ -81,7 +101,8 @@ class FrontendController extends Controller
                 'counter',
                 'testimonials',
                 'blogs',
-                'footerInfo'
+                'footerInfo',
+                'sectionTitle'
             )
         );
     }
@@ -293,12 +314,13 @@ class FrontendController extends Controller
     function aboutIndex(): View
     {
         $about = AboutUs::first();
+        $sectionTitle = SectionTitle::first();
         $ourFeatures = OurFeature::where('status', 1)->get();
         $counter = Counter::first();
         $featuredCategories = Category::withCount(['listings' => function ($query) {
             $query->where('is_approved', 1);
         }])->where(['show_at_home' => 1, 'status' => 1])->take(6)->get();
-        return view('frontend.pages.about', compact('about', 'ourFeatures', 'featuredCategories', 'counter'));
+        return view('frontend.pages.about', compact('about', 'ourFeatures', 'featuredCategories', 'counter', 'sectionTitle'));
     }
 
     function contactIndex(): View

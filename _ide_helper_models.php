@@ -737,6 +737,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\SectionTitle
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|SectionTitle newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SectionTitle newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SectionTitle query()
+ */
+	class SectionTitle extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Setting
  *
  * @property int $id

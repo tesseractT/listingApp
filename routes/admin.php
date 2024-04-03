@@ -35,6 +35,7 @@ use App\Http\Controllers\Admin\ListingVideoGalleryController;
 use App\Http\Controllers\Admin\MenuBuilderController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\RoleUserController;
+use App\Http\Controllers\Admin\SectionTitleController;
 use App\Http\Controllers\Admin\TermsAndConditions;
 use App\Http\Controllers\Admin\TermsAndConditionsController;
 
@@ -57,6 +58,10 @@ Route::group([
     /** Hero Routes */
     Route::get('/hero', [HeroController::class, 'index'])->name('hero.index');
     Route::put('/hero', [HeroController::class, 'update'])->name('hero.update');
+
+    /** Section Title Routes */
+    Route::get('/section-title', [SectionTitleController::class, 'index'])->name('section-title.index');
+    Route::post('/section-title', [SectionTitleController::class, 'update'])->name('section-title.update');
 
     /** Category Routes */
     Route::resource('/category', CategoryController::class);

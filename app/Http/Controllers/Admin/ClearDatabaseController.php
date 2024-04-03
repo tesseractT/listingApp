@@ -19,6 +19,9 @@ class ClearDatabaseController extends Controller
         //Wipe Dtatbase
         Artisan::call('migrate:fresh');
 
+        //Delete Files
+        $this->deleteFiles();
+
         //Seed Database
         Artisan::call('db:seed', [
             '--class' => 'UserSeeder'
@@ -37,5 +40,16 @@ class ClearDatabaseController extends Controller
         ]);
 
         return response(['status' => 'success', 'message' => 'Database Cleared Successfully']);
+    }
+
+    function deleteFiles()
+    {
+        $path = public_path('uploads');
+
+        $allFiles = \File::allFiles($path);
+
+        foreach ($allFiles as $file) {
+            \File::delete($file->getPathname());
+        }
     }
 }

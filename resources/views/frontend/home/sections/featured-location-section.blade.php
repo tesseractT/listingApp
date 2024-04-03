@@ -4,18 +4,22 @@
             <div class="row">
                 <div class="col-xl-5 m-auto">
                     <div class="wsus__heading_area">
-                        <h2>Our location </h2>
-                        <p>Lorem ipsum dolor sit amet, qui assum oblique praesent te. Quo ei erant essent scaevola
-                            estut clita dolorem ei est mazim fuisset scribentur.</p>
+                        <h2>
+                            {{ $sectionTitle?->our_location_title }}
+                        </h2>
+                        <p>
+                            {{ $sectionTitle?->our_location_sub_title }}
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="wsus__location_filter">
-                        <button class="active" data-filter="*">All City</button>
+                        {{-- <button class="active" data-filter="*">All City</button> --}}
                         @foreach ($featuredLocations as $location)
-                            <button data-filter=".{{ $location->slug }}">{{ $location->name }}</button>
+                            <button class="{{ $loop->index === 0 ? 'l_first_tab' : '' }}"
+                                data-filter=".{{ $location->slug }}">{{ $location->name }}</button>
                         @endforeach
                     </div>
                 </div>
@@ -59,3 +63,13 @@
         </div>
     </div>
 </section>
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            setTimout(function() {
+                $('.l_first_tab').trigger('click');
+            }, 500)
+        })
+    </script>
+@endpush
