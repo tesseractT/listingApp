@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/summernote.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/nice-select.css') }}">
 
-    <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css">
+
 
 
 
@@ -128,6 +130,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>
+
 
 
 
