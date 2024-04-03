@@ -1,19 +1,38 @@
  <!--==========================
         TOPBAR PART START
     ===========================-->
+
+ @php
+     $subscription = \App\Models\Subscription::where('user_id', auth()->id())->first();
+ @endphp
  <section id="wsus__topbar">
      <div class="container">
          <div class="row">
              <div class="col-xl-6 col-md-7 d-none d-md-block">
                  <ul class="wsus__topbar_left">
-                     <li><a href="mailto:support@websolutionus.com"><i class="fal fa-envelope"></i>
-                             @gmail.com</a></li>
-                     <li><a href="callto:+6958474522655"><i class="fal fa-phone-alt"></i>+6958474522655</a></li>
+                     <li><a href="mailto:{{ config('settings.site_email') }}"><i class="fal fa-envelope"></i>
+                             {{ config('settings.site_email') }}</a></li>
+                     <li><a href="callto:{{ config('settings.site_phone') }}"><i
+                                 class="fal fa-phone-alt"></i>{{ config('settings.site_phone') }}</a></li>
                  </ul>
              </div>
              <div class="col-xl-6 col-md-5">
-                 <div class="wsus__topbar_right">
-                     <a href="{{ route('login') }}"><i class="fas fa-user"></i> Login</a>
+                 <div class="wsus__topbar_right ">
+                     @auth
+
+                         <a href="{{ route('user.dashboard') }}"><i class="fas fa-user"></i> {{ auth()->user()->name }}</a>
+                         <a href="{{ route('logout') }}"
+                             onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i
+                                 class="fas fa-sign-out-alt"></i> Logout</a>
+                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                             @csrf
+                         </form>
+                     @endauth
+                     @guest
+                         <a href="{{ route('register') }}"><i class="fas fa-user"></i> Register</a>
+                         <a href="{{ route('login') }}"><i class="fas fa-user"></i> Login</a>
+                     @endguest
                  </div>
              </div>
          </div>
@@ -58,7 +77,12 @@
 
 
              </ul>
-             <a class="user_btn" href="dsahboard.html"><i class="far fa-plus"></i> add listing</a>
+             @if (!$subscription)
+                 <a class="user_btn" href="{{ route('packages') }}"><i class="fas fa-tag"></i>Subscribe</a>
+             @else
+                 <a class="user_btn" href="{{ route('user.listing.create') }}"><i class="far fa-plus"></i> add
+                     listing</a>
+             @endif
          </div>
      </div>
  </nav>

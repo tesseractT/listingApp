@@ -8,6 +8,9 @@
     <a href="dsahboard.html" class="dash_logo"><img src="{{ asset(auth()->user()->avatar) }}" alt="logo"
             class="img-fluid"></a>
     <ul class="dashboard_link">
+        @if (auth()->user()->user_type === 'admin')
+            <li><a href="{{ route('admin.dashboard.index') }}"><i class="fas fa-tachometer"></i>Admin Dashboard</a></li>
+        @endif
         <li><a class="active" href="{{ route('user.dashboard') }}"><i class="fas fa-tachometer"></i>Dashboard</a></li>
         <li><a href="{{ route('user.listing.index') }}"><i class="fas fa-list-ul"></i> My Listing</a></li>
         @if ($subscription !== null)

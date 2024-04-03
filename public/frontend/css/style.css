@@ -274,7 +274,7 @@ button {
 }
 
 .wsus__topbar_right a {
-    width: 80px;
+    width: fit-content;
     height: 35px;
     background: var(--colorWhite);
     color: var(--colorPrimary);
@@ -284,6 +284,8 @@ button {
     margin-top: 2.5px;
     font-size: 14px;
     border-radius: 4px;
+    padding-left: 1%;
+    padding-right: 1%;
     transition: all linear .3s;
     -webkit-transition: all linear .3s;
     -moz-transition: all linear .3s;
