@@ -363,6 +363,13 @@
                             Settings</span></a></li>
             @endcan
 
+            {{-- Clear Database --}}
+            @can('clear database')
+                <li><a class="nav-link" href="{{ route('admin.clear-database.index') }}"><i class="far fa-square"></i>
+                        <span>
+                            Wipe Database</span></a></li>
+            @endcan
+
         </ul>
 
 

@@ -17,7 +17,7 @@ if (!function_exists('setSidebarActive')) {
 /** Get Youtube Thumbnail */
 
 if (!function_exists('getYouTubeThumbnail')) {
-    function getYouTubeThumbnail(string $url): ?string
+    function getYouTubeThumbnail(?string $url): ?string
     {
         $pattern = '/[?&]v=([a-zA-Z0-9_-]{11})/';
 

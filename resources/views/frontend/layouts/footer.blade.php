@@ -12,7 +12,7 @@
             <div class="col-xl-3 col-sm-12 col-md-6 col-lg-6">
                 <div class="footer_text">
                     <h3>About Us</h3>
-                    <p>{!! $footerInfo->short_description !!}</p>
+                    <p>{!! $footerInfo?->short_description !!}</p>
                     <ul class="footer_icon">
                         @foreach ($socialLinks as $socialLink)
                             <li><a href="{{ $socialLink->url }}"><i class="{{ $socialLink->icon }}"></i></a></li>

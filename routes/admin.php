@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogCommentController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ClearDatabaseController;
 use App\Http\Controllers\Admin\PaymentSettingController;
 use App\Http\Controllers\Admin\PendingListingController;
 use App\Http\Controllers\Admin\ListingScheduleController;
@@ -175,4 +176,8 @@ Route::group([
     Route::post('/paypal-settings', [PaymentSettingController::class, 'paypalSetting'])->name('paypal-settings.update');
     Route::post('/stripe-settings', [PaymentSettingController::class, 'stripeSetting'])->name('stripe-settings.update');
     Route::post('/razorpay-settings', [PaymentSettingController::class, 'razorpaySetting'])->name('razorpay-settings.update');
+
+    /** Database Clear Routes  */
+    Route::get('/database-clear', [ClearDatabaseController::class, 'index'])->name('clear-database.index');
+    Route::post('/database-clear', [ClearDatabaseController::class, 'clear'])->name('clear-database');
 });

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 use Redirect;
 
 class AgentListingController extends Controller
@@ -39,13 +40,14 @@ class AgentListingController extends Controller
      */
     public function create(): View
     {
+        $subscription = Subscription::with('package')->where('user_id', auth()->id())->first();
+        if (!$subscription) {
+            throw ValidationException::withMessages(['error' => 'You need to subscribe to a package to create a listing']);
+        }
         $categories = Category::all();
         $locations = Location::all();
         $amenities = Amenity::all();
-        $subscription = Subscription::with('package')->where('user_id', auth()->id())->first();
-        if ($subscription === null) {
-            abort(403, 'You need to subscribe to a package to create a listing');
-        }
+
         return view('frontend.dashboard.listing.create', compact('categories', 'locations', 'amenities', 'subscription'));
     }
 

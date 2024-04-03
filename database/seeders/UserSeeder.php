@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
 
         //assign super admin role to super admin user
 
-        $user = User::where('email', 'superadmin@gmail.com')->first();
-        $user->assignRole('Super Admin');
+        // $user = User::where('email', 'superadmin@gmail.com')->first();
+        // $user->assignRole('Super Admin');
     }
 }
